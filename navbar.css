@@ -10,12 +10,14 @@ body {
     font-family: Arial, sans-serif;
 }
 
-*{
-    outline: 1px solid red;
-}
 
 nav {
     grid-area: menu;
+}
+
+nav .card{
+    height: 100%;
+    width: 80%;
 }
 
 main {
@@ -74,7 +76,7 @@ header .title{
     }
     
     main{
-        width: 100%;
+        width: 95%;
     }
 
     
