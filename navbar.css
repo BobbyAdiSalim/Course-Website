@@ -1,0 +1,178 @@
+:root{
+    --primary_color: #25355A;
+    --secondary_color: 	#007FA3;
+    --phone_size: 600px;
+}
+/* Main Body - Setup Position (Gridding for Header, Footer, Left Nav Bar and Content */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+
+nav {
+    grid-area: menu;
+}
+
+main {
+    grid-area: content;
+    padding: 20px;
+}
+
+footer {
+    grid-area: footer;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+/* Header ------------------------------------------------------------ */
+header {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    grid-area: header;
+    background-color: var(--primary_color);
+    color: #fff;
+    padding: 10px;
+}
+
+header .title{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+@media (max-width: 600px){
+
+    .container {
+        display: grid;
+        grid-template-areas:
+            "header header header"
+            "content content content"
+            "footer footer footer";
+        grid-template-rows: auto 1fr auto;
+        grid-template-columns: auto;
+        min-height: 100vh;
+    }
+
+    /* Phone screen? */
+    nav .card{
+        display: hidden;
+        width: 0rem;
+    }
+
+    header{
+        height: 120px;
+    }
+    body .container{
+        margin-top: 140px;
+    }
+
+    nav .card{
+        visibility: hidden;
+        width: 0rem;
+    }
+
+}
+
+@media (min-width: 600px){
+    /* Phone screen? */
+
+    .container {
+        display: grid;
+        grid-template-areas:
+            "header header header"
+            "menu content content"
+            "footer footer footer";
+        grid-template-rows: auto 1fr auto;
+        grid-template-columns: 250px auto;
+        min-height: 100vh;
+    }
+    header{
+        height: 180px;
+    }
+    body .container{
+        margin-top: 250px;
+    }
+    
+}
+
+
+/* Navbar ------------------------------------------------------------ */
+nav{
+    width: 100%;
+}
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+}
+  
+  /* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+  
+  /* Add some padding inside the card container */
+.nav-container {
+    padding: 2px 25px;
+}
+
+
+nav ul {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+nav li {
+    margin-left: 0;
+    margin-top: 10px;
+    margin-bottom: 10px; /* Remove default left margin */
+    
+}
+
+.nav-list a {
+  background-image: linear-gradient(
+    to right,
+    #54b3d6,
+    #54b3d6 50%,
+    #007FA3 50%
+  );
+  
+  background-size: 200% 100%;
+  background-position: -100%;
+  display: inline-block;
+  padding: 5px 0;
+  position: relative;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-list a:before{
+  content: '';
+  background: #54b3d6;
+  display: block;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-list a:hover {
+ background-position: 0;
+}
+
+.nav-list a:hover::before{
+  width: 100%;
+}
+
+main{
+    padding: 0px 10px 0px 10px;
+}

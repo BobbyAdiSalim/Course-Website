@@ -1,0 +1,30 @@
+:root{
+    --primary_color: #25355A;
+    --secondary_color: #007FA3;
+}
+
+.feedback textarea{
+    margin-top: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.feedback .title{
+    color: var(--primary_color);
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.feedback .submit-btn{
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    border: 1px solid;
+    color: white;
+    background-color: var(--secondary_color);
+    height: 30px;
+}
