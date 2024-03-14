@@ -39,7 +39,6 @@ header {
     left:0;
     grid-area: header;
     background-color: var(--primary_color);
-    color: #fff;
     padding: 10px;
     z-index: 1;
     min-height: 70px;
@@ -49,6 +48,9 @@ header {
 header .title{
     font-size: 24px;
     font-weight: 600;
+    color: #FFFFFF;
+    text-decoration: none;
+
 }
 
 main{
@@ -144,6 +146,7 @@ nav li {
   display: inline-block;
   padding: 5px 0;
   position: relative;
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: all 0.3s ease-in-out;

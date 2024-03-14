@@ -12,10 +12,6 @@
     border-bottom: 1px solid #ccc; /* Optional: Add a border between rows */
 }
 
-.labs .column-5{
-    flex: 0.5;
-    padding: 0 10px;
-}
 .labs .column {
     flex: 1;
     padding-left: 10px;

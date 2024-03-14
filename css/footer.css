@@ -40,8 +40,6 @@ footer{
     margin: 2px 15px 0 0;
 }
 
-
-
 .author-list {
     list-style-type: none;
     padding: 0;
@@ -64,6 +62,7 @@ footer{
 .navigation {
     display: flex;
     flex-direction: column;
+    font-weight: bold;
 }
 
 .navigation div{
