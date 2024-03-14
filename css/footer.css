@@ -1,35 +1,44 @@
 footer{
     margin-top: 10px;
 }
-@media (min-width: 900px){
+@media (min-width: 800px){
     .footer {
         display: flex;
         justify-content: space-between;
         background-color: #25355A;
         color: #F2F4F7;
-        padding: 20px;
+        padding: 20px 20px 0 20px;
         font-family: Arial, Helvetica, sans-serif;
     }
+    .footer-4 {
+        background-image: url("/../images/toronto-b.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center bottom;
+   }
 }
 
-@media (max-width: 900px){
+@media (max-width: 800px){
     .footer {
         flex-direction: column;
         display: flex;
         justify-content: space-between;
         align-content: center;
-        background-color: #25355A;
+        background-color: #333333;
         color: #F2F4F7;
-        padding: 20px;
+        padding: 20px 20px 0 20px;
         font-family: Arial, Helvetica, sans-serif;
         
     }
-    .footer-4 .navigation{
+    .footer-4 {
         border-top: 1px solid white ;
         padding: 10px 0px 0px 0px;
         margin: 10px 0px 0px 0px;
+        background-image: url("/../images/toronto-g.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right bottom;
     }
-   
 }
 
 
@@ -56,9 +65,12 @@ footer{
     margin-bottom: 5px;
 }
 
+.links {
+    padding-left: 30px;
+}
+
 .footer-nav {
     display: flex;
-
 }
 
 .footer a {

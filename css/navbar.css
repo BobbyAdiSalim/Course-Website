@@ -183,26 +183,24 @@ main{
 }
 
 .header-flex-1{
-    flex: 10;
+    flex: 7;
+    padding-right: 40px;
 }
 
 .header-flex-2{
     flex: 1;
+    text-align: right;
+    padding-right: 15px;
 }
-
-.header-flex-2 a{
-    color: white;
-    text-decoration: none;
-}
-
 
 .header-flex-2 a {
+    color: white;
+    text-decoration: none;
     background-image: linear-gradient(
       to right,
       #54b3d6 50%,
       white 50%
     );
-    
     background-size: 200% 100%;
     background-position: -100%;
     display: inline-block;
