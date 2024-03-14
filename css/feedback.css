@@ -3,9 +3,17 @@
     --secondary_color: #007FA3;
 }
 
+.feedback hr{
+    margin-top: 0px;
+    height: 3px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(50, 127, 163, 0.5);
+}
+
 .feedback textarea{
     margin-top: 5px;
     width: 100%;
+    height: 500px;
     box-sizing: border-box;
     border: 2px solid #ccc;
     padding: 10px;
@@ -15,7 +23,7 @@
 .feedback .title{
     color: var(--primary_color);
     font-size: 1.5rem;
-    font-weight: 900;
+    font-weight: 700;
 }
 
 .feedback .submit-btn{
@@ -26,5 +34,5 @@
     border: 1px solid;
     color: white;
     background-color: var(--secondary_color);
-    height: 30px;
+    height: 40px;
 }
