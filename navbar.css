@@ -10,7 +10,9 @@ body {
     font-family: Arial, sans-serif;
 }
 
-
+*{
+    outline: 1px solid red;
+}
 
 nav {
     grid-area: menu;
@@ -30,14 +32,15 @@ footer {
 
 /* Header ------------------------------------------------------------ */
 header {
-    position: absolute;
+    position: sticky;
     top:0;
     left:0;
-    width: 100%;
     grid-area: header;
     background-color: var(--primary_color);
     color: #fff;
     padding: 10px;
+    z-index: 1;
+    min-height: 70px;
 }
 
 header .title{
@@ -45,36 +48,14 @@ header .title{
     font-weight: 600;
 }
 
+
 @media (max-width: 600px){
 
-    .container {
-        display: grid;
-        grid-template-areas:
-            "header header header"
-            "content content content"
-            "footer footer footer";
-        grid-template-rows: auto 1fr auto;
-        grid-template-columns: auto;
-        min-height: 100vh;
-    }
-
-    /* Phone screen? */
-    nav .card{
-        display: hidden;
-        width: 0rem;
-    }
-
-    header{
-        height: 120px;
-    }
-    body .container{
-        margin-top: 140px;
-    }
-
-    nav .card{
+    nav{
+        display: none;
         visibility: hidden;
         width: 0rem;
-    }
+    };
 
 }
 
@@ -91,12 +72,11 @@ header .title{
         grid-template-columns: 250px auto;
         min-height: 100vh;
     }
-    header{
-        height: 180px;
+    
+    main{
+        width: 100%;
     }
-    body .container{
-        margin-top: 250px;
-    }
+
     
 }
 
