@@ -36,3 +36,7 @@
     background-color: var(--secondary_color);
     height: 40px;
 }
+
+.feedback .submit-btn:hover{
+    background-color: var(--primary_color);
+}

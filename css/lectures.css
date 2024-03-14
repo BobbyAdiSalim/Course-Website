@@ -5,6 +5,12 @@
     padding: 20px;
 }
 
+.labs .week-column{
+    flex: 0.5;
+    padding-left: 10px;
+    padding-right: 90px;
+}
+
 .labs .row {
     display: flex;
     justify-content: space-between;
@@ -13,7 +19,7 @@
 }
 
 .labs .column {
-    flex: 1;
+    flex: 1.1;
     padding-left: 10px;
     padding-right: 90px;
 }
