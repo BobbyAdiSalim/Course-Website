@@ -14,5 +14,10 @@
 
 .labs .column {
     flex: 1;
-    padding: 0 10px;
+    padding-left: 10px;
+    padding-right: 90px;
+}
+
+.labs .table-head {
+    font-weight: bold;
 }
