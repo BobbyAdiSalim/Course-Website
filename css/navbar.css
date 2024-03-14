@@ -17,7 +17,7 @@ nav {
 
 nav .card{
     height: 100%;
-    width: 80%;
+    width: 100%;
 }
 
 main {
@@ -43,6 +43,7 @@ header {
     padding: 10px;
     z-index: 1;
     min-height: 70px;
+    margin-bottom: 10px;
 }
 
 header .title{
@@ -50,18 +51,35 @@ header .title{
     font-weight: 600;
 }
 
+main{
+    width: 95%;
+}
 
 @media (max-width: 600px){
 
-    nav{
+    .nav-card{
         display: none;
         visibility: hidden;
         width: 0rem;
     };
 
 }
+@media (min-width:600px) and (max-width: 800px){
 
-@media (min-width: 600px){
+    .container {
+        display: grid;
+        grid-template-areas:
+            "header header header"
+            "menu content content"
+            "footer footer footer";
+        grid-template-rows: auto 1fr auto;
+        grid-template-columns: 200px auto;
+        min-height: 100vh;
+    }
+
+}
+
+@media (min-width: 800px){
     /* Phone screen? */
 
     .container {
@@ -75,11 +93,7 @@ header .title{
         min-height: 100vh;
     }
     
-    main{
-        width: 95%;
-    }
-
-    
+ 
 }
 
 
