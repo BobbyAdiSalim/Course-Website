@@ -15,6 +15,9 @@ body {
 .index h1 {
     margin-bottom: 8px;
     font-style: oblique;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 .index h2{
     margin-bottom: 8px;
