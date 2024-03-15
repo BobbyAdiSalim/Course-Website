@@ -1,0 +1,35 @@
+:root{
+    --primary_color: #25355A;
+    --secondary_color: #007FA3;
+}
+body {
+    background-color: #FFFFFF;
+    color: var(--primary_color);
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+
+.resources{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.resources h1 {
+    margin-bottom: 8px;
+    font-style: oblique;
+}
+.resources h2{
+    margin-bottom: 8px;
+    font-style: oblique;
+}
+.resources .line-break{
+    margin-top: 0px;
+    height: 3px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(50, 127, 163, 0.5);
+}
+.icon{
+    display: flex; 
+    align-items: center;
+}
+.image{
+    margin-left: 20px;
+}
