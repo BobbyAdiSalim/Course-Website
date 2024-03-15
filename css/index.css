@@ -12,6 +12,7 @@ body {
     margin-left: 10px;
     margin-right: 10px;
 }
+
 .index h1 {
     margin-bottom: 8px;
     font-style: oblique;
@@ -19,10 +20,12 @@ body {
     margin-right: auto;
     text-align: center;
 }
+
 .index h2{
     margin-bottom: 8px;
     font-style: oblique;
 }
+
 .index .line-break{
     margin-top: 0px;
     height: 3px;

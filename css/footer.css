@@ -1,6 +1,4 @@
-footer{
-    margin-top: 10px;
-}
+/* Media Queries for Phone and PC Screen */
 @media (min-width: 800px){
     .footer {
         display: flex;
@@ -42,11 +40,30 @@ footer{
 }
 
 
+/* Set Footer Elements ---------------------------------------------- */
+footer{
+    margin-top: 10px;
+}
+
 .footer-heading {
     font-weight: bold;
     margin: 5px 0;
 }
 
+.footer-nav {
+    display: flex;
+}
+
+.footer a {
+    color: #F2F4F7;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Set Button Icon ---------------------------------------------- */
 .icons {
     margin: 15px 0;
     display: flex;
@@ -56,6 +73,7 @@ footer{
     margin: 2px 15px 0 0;
 }
 
+/* Set For Author ---------------------------------------------- */
 .author-list {
     list-style-type: none;
     padding: 0;
@@ -69,15 +87,8 @@ footer{
     padding-left: 30px;
 }
 
-.footer-nav {
-    display: flex;
-}
 
-.footer a {
-    color: #F2F4F7;
-    text-decoration: none;
-}
-
+/* Set Navigation Elements ---------------------------------------------- */
 .navigation {
     display: flex;
     flex-direction: column;
@@ -88,6 +99,3 @@ footer{
     margin: 5px 0;
 }
 
-.footer a:hover {
-    text-decoration: underline;
-}

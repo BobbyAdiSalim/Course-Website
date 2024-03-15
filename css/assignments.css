@@ -2,6 +2,7 @@
     --primary_color: #25355A;
     --secondary_color: #007FA3;
 }
+
 body {
     background-color: #FFFFFF;
     color: var(--primary_color);

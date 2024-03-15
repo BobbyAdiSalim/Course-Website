@@ -10,19 +10,11 @@ body {
     font-family: Arial, sans-serif;
 }
 
-
-nav {
-    grid-area: menu;
-}
-
-nav .card{
-    height: 100%;
-    width: 100%;
-}
-
 main {
     grid-area: content;
     padding: 20px;
+    padding: 0px 10px 0px 10px;
+    width: 95%;
 }
 
 footer {
@@ -51,129 +43,6 @@ header .title{
     color: #FFFFFF;
     text-decoration: none;
 
-}
-
-main{
-    width: 95%;
-}
-
-@media (max-width: 600px){
-
-    .nav-card{
-        display: none;
-        visibility: hidden;
-        width: 0rem;
-    };
-
-}
-@media (min-width:600px) and (max-width: 800px){
-
-    .container {
-        display: grid;
-        grid-template-areas:
-            "header header header"
-            "menu content content"
-            "footer footer footer";
-        grid-template-rows: auto 1fr auto;
-        grid-template-columns: 200px auto;
-        min-height: 100vh;
-    }
-
-}
-
-@media (min-width: 800px){
-    /* Phone screen? */
-
-    .container {
-        display: grid;
-        grid-template-areas:
-            "header header header"
-            "menu content content"
-            "footer footer footer";
-        grid-template-rows: auto 1fr auto;
-        grid-template-columns: 250px auto;
-        min-height: 100vh;
-    }
-    
- 
-}
-
-
-/* Navbar ------------------------------------------------------------ */
-nav{
-    width: 100%;
-}
-.card {
-    /* Add shadows to create the "card" effect */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 100%;
-}
-  
-  /* On mouse-over, add a deeper shadow */
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-  
-  /* Add some padding inside the card container */
-.nav-container {
-    padding: 2px 25px;
-}
-
-
-nav ul {
-    list-style-type: none; /* Remove bullets */
-    padding: 0; /* Remove default padding */
-    margin: 0; /* Remove default margin */
-}
-nav li {
-    margin-left: 0;
-    margin-top: 10px;
-    margin-bottom: 10px; /* Remove default left margin */
-    
-}
-
-.nav-list a {
-  background-image: linear-gradient(
-    to right,
-    #54b3d6,
-    #54b3d6 50%,
-    #007FA3 50%
-  );
-  
-  background-size: 200% 100%;
-  background-position: -100%;
-  display: inline-block;
-  padding: 5px 0;
-  position: relative;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: all 0.3s ease-in-out;
-}
-
-.nav-list a:before{
-  content: '';
-  background: #54b3d6;
-  display: block;
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 0;
-  height: 3px;
-  transition: all 0.3s ease-in-out;
-}
-
-.nav-list a:hover {
- background-position: 0;
-}
-
-.nav-list a:hover::before{
-  width: 100%;
-}
-
-main{
-    padding: 0px 10px 0px 10px;
 }
 
 .header-flex{
@@ -231,3 +100,123 @@ main{
   .header-flex-2 a:hover::before{
     width: 100%;
   }
+
+/* Media Queries for Phone and PC Screen --------------------------- */
+@media (max-width: 600px){
+    .nav-card{
+        display: none;
+        visibility: hidden;
+        width: 0rem;
+    };
+
+}
+
+@media (min-width:600px) and (max-width: 800px){
+    .container {
+        display: grid;
+        grid-template-areas:
+            "header header header"
+            "menu content content"
+            "footer footer footer";
+        grid-template-rows: auto 1fr auto;
+        grid-template-columns: 200px auto;
+        min-height: 100vh;
+    }
+}
+
+@media (min-width: 800px){
+    /* Phone screen? */
+
+    .container {
+        display: grid;
+        grid-template-areas:
+            "header header header"
+            "menu content content"
+            "footer footer footer";
+        grid-template-rows: auto 1fr auto;
+        grid-template-columns: 250px auto;
+        min-height: 100vh;
+    }
+    
+ 
+}
+
+
+/* Navbar ------------------------------------------------------------ */
+nav{
+    width: 100%;
+    grid-area: menu;
+}
+
+
+nav .card{
+    height: 100%;
+    width: 100%;
+
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+}
+  
+nav .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.nav-container {
+    padding: 2px 25px;
+}
+
+nav ul {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+nav li {
+    margin-left: 0;
+    margin-top: 10px;
+    margin-bottom: 10px; /* Remove default left margin */
+    
+}
+
+
+/* Setup Nav for the Hovering Animation */
+.nav-list a {
+  background-image: linear-gradient(
+    to right,
+    #54b3d6,
+    #54b3d6 50%,
+    #007FA3 50%
+  );
+  
+  background-size: 200% 100%;
+  background-position: -100%;
+  display: inline-block;
+  padding: 5px 0;
+  position: relative;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-list a:before{
+  content: '';
+  background: #54b3d6;
+  display: block;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-list a:hover {
+ background-position: 0;
+}
+
+.nav-list a:hover::before{
+  width: 100%;
+}
+

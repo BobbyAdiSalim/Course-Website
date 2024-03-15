@@ -1,11 +1,13 @@
+#myPage{
+  width: 100%;
+}
+
+
+/* Setup for Card Animation --------------------------------------- */
 .teamcard {
   /* Add shadows to create the "card" effect */
   box-shadow: 0 100px 100px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-}
-
-#myPage{
-  width: 100%;
 }
 
 .flip-card img{
@@ -19,29 +21,25 @@
     box-shadow: inset 0 12px 12px -12px rgba(50, 127, 163, 0.5);
 }
 
-
-/* On mouse-over, add a deeper shadow */
 .teamcard:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-/* Add some padding inside the card container */
 .teamcontainer {
   padding: 2px 16px;
 }
 
-
 .flip-card {
   background-color: transparent;
   border: 1px solid #f1f1f1;
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  perspective: 1000px;
   margin: 25px;
 }
 
 .flip-card h3{
   margin: 1px;
 }
-/* This container is needed to position the front and back side */
+
 .flip-card-inner {
   position: relative;
   width: 100%;
@@ -51,27 +49,24 @@
   transform-style: preserve-3d;
 }
 
-/* Do an horizontal flip when you move the mouse over the flip box container */
+
 .flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
 }
 
-/* Position the front and back side */
 .flip-card-front, .flip-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
+  -webkit-backface-visibility: hidden; 
   backface-visibility: hidden;
 }
 
-/* Style the front side (fallback if image is missing) */
 .flip-card-front {
   background-color: #25355A;
   color: white;
 }
 
-/* Style the back side */
 .flip-card-back {
   background-color: #25355A;
   color: white;
@@ -83,7 +78,6 @@
   margin: auto;
   font-family: Geneva, Arial, Helvetica, sans-serif;
 }
-
 
 .profname {
   font-size: 25px;
@@ -147,6 +141,7 @@
     font-family: Geneva, Arial, Helvetica, sans-serif;
 }
 
+/* Media Queries for Phone and PC Screen */
 @media (min-width:900px){
   .box {
     display: flex;
