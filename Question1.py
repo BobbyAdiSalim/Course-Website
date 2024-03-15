@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Hello World!"
+    return "<html><body><h1>Welcome to my CSCB20 website!</h1></body></html>"
 
 @app.route("/<name>", methods = ["GET"])
 def process_name(name):
@@ -19,7 +19,7 @@ def process_name(name):
                 greet = greet + char
     else:
             greet = name[:1].upper() + name[1:].lower()
-    return "<html><body><h1>Welcome, "+ greet+ " to my CSCB20 website!</h1></body></html>"
+    return "<html><body><h1>Welcome, "+ greet+ ", to my CSCB20 website!</h1></body></html>"
 
 if __name__ == "__main__":
     app.run(debug=True)
