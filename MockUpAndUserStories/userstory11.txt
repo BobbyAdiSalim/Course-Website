@@ -1,0 +1,5 @@
+As a user, the student must be able to view the information of the course team.
+
+When the student clicks on the "Course Team" navigation button, the student should be able to view the profile of each Teaching Assistant and the Instructor. 
+
+When the student hovers over one of the profiles, the profile will be flipped and it will show the TA/Instructor's Office Hours, Location, and Contact Information.

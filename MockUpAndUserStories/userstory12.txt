@@ -1,0 +1,5 @@
+As a user, the student must be able to view the resources that are useful for the course.
+
+When the student clicks on the "Resources" navigation button, the student should be able to view a few options of available online resources that may be useful for the student's learning experience for this course.
+
+Every icon on the right side of the resources name is clickable and will direct the student to the corresponding page.

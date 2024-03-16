@@ -1,0 +1,11 @@
+As a user, the student must be able to see the home page of the course website when clicking on the website link.
+
+Student must be able to see the course description, required background, motivation, course learning outcomes, and instructor information.
+
+User can also directly email the instructor by clicking the e-mail section. 
+
+On the left of the website, there is a navigation bar where user can access different pages by clicking on the navigation bar.
+
+On the bottom, there is also a navigation bar and links to the CMS socials.
+
+On the top, there is a "Back to Top" navigation button to let user immediately and automatically scroll back up after scrolling down the page.

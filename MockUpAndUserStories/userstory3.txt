@@ -1,0 +1,7 @@
+As a user, the student must be able to see the course calendar by clicking the "Calendar" on the navigation bar.
+
+Students should be able to see the calendar of the current month or other months as well (previous/future months) by clicking on the left and right arrow on top of the calendar.
+
+On the calendar, students can see the agenda of the day: exams, office hours, lectures, tutorials, etc.
+
+Students are also given the option to add the agenda onto their Google Calendar by clicking on the Google Calendar icon on the bottom, or print the calendar by clicking on the print button on the top right side of the calendar. 

@@ -1,0 +1,3 @@
+As a user, the student must be able to see contents/materials of tutorials for every week.
+
+When the student clicks on the "Labs" navigation button, the student should be able to view the worksheets and solutions corresponding to the week and topic. When they click on it, the content will be automatically downloaded. 
