@@ -1,0 +1,46 @@
+:root{
+    --primary_color: #25355A;
+    --secondary_color: #007FA3;
+}
+
+body {
+    background-color: #FFFFFF;
+    color: var(--primary_color);
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+
+.assignments{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.assignments h2{
+    font-style: oblique;
+}
+
+.assignments a{
+    color: var(--primary_color);
+    text-decoration: none;
+}
+
+.assignments a:hover{
+    text-decoration: underline;
+}
+
+.assignments .line-break{
+    margin-top: 0px;
+    height: 3px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(50, 127, 163, 0.5);
+}
+
+.assignments .subsect {
+    padding: 6px 0;
+}
+
+.assignments .first {
+    padding-top: 0;
+}
+
+.assignments p {
+    margin-block: 3px 5px;
+}
