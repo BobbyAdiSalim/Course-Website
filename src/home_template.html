@@ -29,19 +29,39 @@
       <div class="card">
         <div class="nav-container">
           <ul class="nav-list">
-            <li> <a href="/"><b>Home</b></a></li>
-            <li> <a href="/news">News </a></li>
-            <li> <a href="/calendar">Calendar</a></li>
-            <li> <a href="/lectures">Lectures </a></li>
-            <li> <a href="/assignments">Assignments </a></li>
-            <li> <a href="/tests"> Tests </a></li>
-            <li> <a href="/labs">Labs </a></li>
-            <li> <a href="mock.pdf" target="_blank">Syllabus </a></li>
+            <li> <a href="/" {% if home %}
+                style = "font-weight: bold;"
+              {% endif %}>Home</a></li>
+            <li> <a href="/news" {% if news %}
+                style = "font-weight: bold;"
+              {% endif %}>News </a></li>
+            <li> <a href="/calendar" {% if calendar %}
+                style = "font-weight: bold;"
+              {% endif %}>Calendar</a></li>
+            <li> <a href="/lectures" {% if lectures %}
+                style = "font-weight: bold;"
+              {% endif %}>Lectures </a></li>
+            <li> <a href="/assignments" {% if assignments %}
+                style = "font-weight: bold;"
+              {% endif %}>Assignments </a></li>
+            <li> <a href="/tests" {% if tests %}
+                style = "font-weight: bold;"
+              {% endif %}> Tests </a></li>
+            <li> <a href="/labs" {% if labs %}
+                style = "font-weight: bold;"
+              {% endif %}>Labs </a></li>
+            <li> <a href="{{ url_for('static', filename = 'pdf/mock.pdf' ) }}" target="_blank">Syllabus </a></li>
             <li> <a href="https://piazza.com/class/lqy466htv8g5xb" target="_blank">Discussion Board </a></li>
             <li> <a href="https://markus2.utsc.utoronto.ca/courses/20" target="_blank">MarkUs </a></li>
-            <li> <a href="/team">Course Team </a></li>
-            <li> <a href="/resources">Resources</a></li>
-            <li> <a href="/feedback">Anonymous Feedback </a></li>
+            <li> <a href="/team" {% if team %}
+                style = "font-weight: bold;"
+              {% endif %}>Course Team </a></li>
+            <li> <a href="/resources" {% if resources %}
+                style = "font-weight: bold;"
+              {% endif %}>Resources</a></li>
+            <li> <a href="/feedback" {% if feedback %}
+                style = "font-weight: bold;"
+              {% endif %}>Anonymous Feedback </a></li>
           </ul>
         </div>
       </div>
@@ -70,23 +90,25 @@
       </div>
       <div class="footer-2 links">
         <div class="navigation">
-          <div><a href="index.html"><b>Home</b></a></div>
-          <div><a href="news.html">News</a></div>
-          <div><a href="calendar.html">Calendar</a></div>
-          <div><a href="lectures.html">Lectures</a></div>
-          <div><a href="assignments.html">Assignments</a></div>
-          <div><a href="tests.html">Tests</a></div>
-          <div><a href="labs.html">Labs</a></div>
+          <div><a href="/" {% if home %}
+            style = "font-weight: bold;"
+          {% endif %}>Home</a></div>
+          <div><a href="/news">News</a></div>
+          <div><a href="/calendar">Calendar</a></div>
+          <div><a href="/lectures">Lectures</a></div>
+          <div><a href="/assignments">Assignments</a></div>
+          <div><a href="/tests">Tests</a></div>
+          <div><a href="/labs">Labs</a></div>
         </div>
       </div>
       <div class="footer-3 links">
         <div class="navigation">
-          <div><a href="mock.pdf">Syllabus</a></div>
+          <div><a href="{{ url_for('static', filename = 'pdf/mock.pdf' ) }}">Syllabus</a></div>
           <div><a href="https://piazza.com/class/lqy466htv8g5xb" target="_blank">Discussion Board</a></div>
           <div><a href="https://markus2.utsc.utoronto.ca/courses/20/assignments" target="_blank">MarkUs</a></div>
-          <div><a href="team.html">Course Team</a></div>
-          <div><a href="resources.html">Resources</a></div>
-          <div><a href="feedback.html">Feedback</a></div>
+          <div><a href="/team">Course Team</a></div>
+          <div><a href="/resources">Resources</a></div>
+          <div><a href="/feedback">Feedback</a></div>
         </div>
       </div>
       <div class="footer-4">
