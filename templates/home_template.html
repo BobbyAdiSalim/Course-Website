@@ -11,17 +11,21 @@
   <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet" type="text/css">  
     {% block extra_css %}
     {% endblock %}
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- <link href="navbar.css" rel="stylesheet" type="text/css">
   <link href="footer.css" rel="stylesheet" type="text/css">
   <link href="index.css" rel="stylesheet" type="text/css"> -->
 </head>
 
 <body id="top">
+  <div class ="top-btn"></div>
+  
   <header>
     <div class="header-flex">
-      <div class="header-flex-1 title"><a href="index.html" class="title">CSCB20: Introduction to Database and Web
+      <div class="header-flex-1 title"><a href="/" class="title">CSCB20: Introduction to Database and Web
           Appplications</a></div>
-      <div class="header-flex-2 top-btn"><a href="#top">Back to Top</a></div>
+        <div class="header-flex-2"> <a href="/login"> Login </a></div>
     </div>
   </header>
   <div class="container">

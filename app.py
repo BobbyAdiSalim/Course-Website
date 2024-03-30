@@ -1,11 +1,21 @@
-from flask import Flask, render_template
+from flask import (
+    Flask, 
+    render_template, 
+    request, 
+    url_for,
+    session,
+    abort,
+    flash
+    )
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///assignment3.db'
-
+app.config["SECRET_KEY"] = "HJSCYIGA1982UYCH2C78E2BCGWGVXFTGbYDXGUBAJGDWUYGVDXGvjgsjVGGHJDWI"
 db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
 
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -75,7 +85,23 @@ def resources():
 def feedback():
     return render_template("feedback.html", feedback = True)
 
+@app.route('/tests/add', methods = ["GET", "POST"])
+def addtest():
+    if request.method == 'GET':
+        return render_template("tests_add.html")
+    else:
+        # Do something here
+        name = request.form["name"]
+        desc = request.form["desc"]
+        due_date = request.form["due_date"]
 
+        # Convert to SQLite date
+        due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
+    test = Test(name = name, desc = desc, due_date = due_date)
+    db.session.add(test)
+    db.session.commit()
+
+    return "Success"
 
 if __name__ == "__main__":
     app.run(debug=True)
