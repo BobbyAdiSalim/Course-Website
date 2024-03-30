@@ -20,7 +20,7 @@ def calendar():
 
 @app.route("/lectures")
 def lectures():
-    return render_template("lectures.html", lecture = True)
+    return render_template("lectures.html", lectures = True)
 
 @app.route("/assignments")
 def assignments():
