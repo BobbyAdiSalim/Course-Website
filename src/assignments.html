@@ -1,144 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSCB20: Assignments</title>
-    <link rel="icon" href="images/b20-icon.png" type="image/icon">
-    <link href="navbar.css" rel="stylesheet" type="text/css">
-    <link href="footer.css" rel="stylesheet" type="text/css">
-    <link href="assignments.css" rel="stylesheet" type="text/css">
-</head>
+{% extends 'home_template.html' %}
 
-<body id ="top">
-    <header>
-      <div class="header-flex" >
-        <div class="header-flex-1 title"><a href="index.html" class="title">CSCB20: Introduction to Database and Web Appplications</a></div>
-        <div class="header-flex-2 top-btn"><a href="#top">Back to Top</a></div>
+{% block extra_css %}
+  <link href="{{ url_for('static', filename='css/assignments.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+<main class="assignments">
+  <hr class="line-break">
+  <div class="assignment1">
+      <a href="mock.pdf"><h2>Assignment 1</h2></a>
+      <hr>
+      <div class="subsect first"><b>Topic: </b>Relational Algebra and SQLite</div>
+      <div class="subsect"><b>Weight: </b>8%</div>
+      <div class="subsect"><b>Due date: </b>February 14<sup>th</sup> 2024</div>
+      <div class="subsect"><b>Brief description: </b>
+      <p>In this assignment, you are a SQL Developer Intern on the University of Toruneto Health and Safety Team. 
+          Your team is working on projects related to Uni 2.0, a hybrid online and in person method of education 
+          during the pandemic. The senior database developer has written out some relationship schemas and would 
+          like you to write out RA and/or SQL queries for the following.</p>
       </div>
-    </header>
-    <div class="container">
-        <nav class="nav-card">
-            <div class="card">
-              <div class="nav-container">
-                <ul class="nav-list">
-                  <li> <a href="index.html"> Home </a></li>
-                  <li> <a href="news.html">News </a></li>
-                  <li> <a href="calendar.html">Calendar</a></li>
-                  <li> <a href="lectures.html">Lectures </a></li>
-                  <li> <a href="assignments.html"> <b>Assignments </b></a></li>
-                  <li> <a href="tests.html"> Tests </a></li>
-                  <li> <a href="labs.html">Labs </a></li>
-                  <li> <a href="mock.pdf" target="_blank">Syllabus </a></li>
-                  <li> <a href="https://piazza.com/class/lqy466htv8g5xb" target="_blank">Discussion Board </a></li>
-                  <li> <a href="https://markus2.utsc.utoronto.ca/courses/20" target="_blank">MarkUs </a></li>
-                  <li> <a href="team.html">Course Team </a></li>
-                  <li> <a href="resources.html">Resources</a></li>
-                  <li> <a href="feedback.html">Anonymous Feedback </a></li>
-                </ul>
-              </div>
-            </div>
-      
-          </nav>
-        <main class="assignments">
-            <hr class="line-break">
-            <div class="assignment1">
-                <a href="mock.pdf"><h2>Assignment 1</h2></a>
-                <hr>
-                <div class="subsect first"><b>Topic: </b>Relational Algebra and SQLite</div>
-                <div class="subsect"><b>Weight: </b>8%</div>
-                <div class="subsect"><b>Due date: </b>February 14<sup>th</sup> 2024</div>
-                <div class="subsect"><b>Brief description: </b>
-                <p>In this assignment, you are a SQL Developer Intern on the University of Toruneto Health and Safety Team. 
-                    Your team is working on projects related to Uni 2.0, a hybrid online and in person method of education 
-                    during the pandemic. The senior database developer has written out some relationship schemas and would 
-                    like you to write out RA and/or SQL queries for the following.</p>
-                </div>
-                <hr class="line-break">
-            </div>
-            <div class="assignment2">
-                <a href="mock.pdf"><h2>Assignment 2</h2></a>
-                <hr>
-                <div class="subsect first"><b>Topic: </b>HTML, CSS, and Flask</div>
-                <div class="subsect"><b>Weight: </b>10%</div>
-                <div class="subsect"><b>Due date: </b>March 15<sup>th</sup> 2024</div>
-                <div class="subsect"><b>Brief description: </b>
-                <p>In this assignment, you will develop a new course website for the course CSC B20 using HTML and CSS. You 
-                    are not allowed to use any web framework such as BootStrap and JQuery etc. You may work individually or 
-                    in groups of two or three. The webpage must be usable, responsive, and visually appealing. Below is an 
-                    example course page, however it is up to you to create a design following the mandates listed in this 
-                    assignment. I want you to have some fun with this assignment. There are some minimum requirements, but 
-                    for the most part, there is a lot of creativity!</p>
-                </div>
-                <hr class="line-break">
-            </div>
-            <div class="assignment3">
-                <a href="mock.pdf"><h2>Assignment 3</h2></a>
-                <hr>
-                <div class="subsect first"><b>Topic: </b>Web Application and Database</div>
-                <div class="subsect"><b>Weight: </b>15%</div>
-                <div class="subsect"><b>Due date: </b>April 15<sup>th</sup> 2024</div>
-                <div class="subsect"><b>Brief description: </b>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris augue ipsum, rutrum vitae tincidunt 
-                    cursus, gravida vel mauris. Duis posuere erat sed nulla molestie, nec pulvinar augue molestie. Mauris at 
-                    mattis lacus. Nullam diam lectus, luctus a neque non, hendrerit placerat ligula. In ligula justo, aliquam et 
-                    felis a, varius molestie mi. Nulla fringilla, ante quis sollicitudin facilisis, felis diam elementum nisi, 
-                    nec volutpat neque lacus vel purus. Pellentesque habitant morbi tristique senectus et netus et malesuada 
-                    fames ac turpis egestas. Etiam ac dapibus erat. Integer in tempus elit, in egestas dui. Vestibulum velit leo, 
-                    pretium et lectus ac, molestie.</p>
-                </div>
-                <hr class="line-break">
-            </div>
-        </main>
-        <footer class="footer">
-            <div class="footer-1">
-              <div class="footer-heading" style="font-size: 2rem;">CSCB20</div>
-              <div class="footer-heading" style="font-size: 1.5rem;">Introduction to Databases and Web Applications</div>
-              <div style="font-weight: 500; opacity: 50%;">Created by:
-                <a href="https://www.linkedin.com/in/ariellasiahaan/" target="_blank">Ariella,</a>
-                <a href="https://www.linkedin.com/in/bobby-adi-salim/" target="_blank">Bobby,</a>
-                <a href="https://www.linkedin.com/in/danielstevanus/" target="_blank">Daniel</a>
-              </div>
-              <div class="icons">
-                <a href="https://www.instagram.com/utsccms/" target="_blank"><img src="images/Instagram_Glyph_White.png"
-                    alt="I" style="height:20px"></a>
-                <a href="https://www.linkedin.com/company/utsccms/" target="_blank"><img src="images/linkedin.png" alt="M"
-                    style="height:20px"></a>
-                <a href="https://piazza.com/class/lqy466htv8g5xb" target="_blank"><img src="images/piazza.png" alt="P"
-                    style="height:20px"></a>
-                <a href="https://markus2.utsc.utoronto.ca/courses/20/assignments" target="_blank"><img src="images/markus.png"
-                    alt="M" style="height:20px"></a>
-              </div>
-            </div>
-            <div class="footer-2 links">
-              <div class="navigation">
-                <div><a href="index.html"><b>Home</b></a></div>
-                <div><a href="news.html">News</a></div>
-                <div><a href="calendar.html">Calendar</a></div>
-                <div><a href="lectures.html">Lectures</a></div>
-                <div><a href="assignments.html">Assignments</a></div>
-                <div><a href="tests.html">Tests</a></div>
-                <div><a href="labs.html">Labs</a></div>
-              </div>
-            </div>
-            <div class="footer-3 links">
-              <div class="navigation">
-                <div><a href="mock.pdf">Syllabus</a></div>
-                <div><a href="https://piazza.com/class/lqy466htv8g5xb" target="_blank">Discussion Board</a></div>
-                <div><a href="https://markus2.utsc.utoronto.ca/courses/20/assignments" target="_blank">MarkUs</a></div>
-                <div><a href="team.html">Course Team</a></div>
-                <div><a href="resources.html">Resources</a></div>
-                <div><a href="feedback.html">Feedback</a></div>
-              </div>
-            </div>
-            <div class="footer-4">
-              <nav class="navigation">
-                <div><a href="https://web.cs.toronto.edu/about/our-department" target="_blank">University of Toronto <br>
-                    Computer Science Department</a></div>
-              </nav>
-            </div>
-          </footer>
-    </div>
-</body>
-</html>
+      <hr class="line-break">
+  </div>
+  <div class="assignment2">
+      <a href="mock.pdf"><h2>Assignment 2</h2></a>
+      <hr>
+      <div class="subsect first"><b>Topic: </b>HTML, CSS, and Flask</div>
+      <div class="subsect"><b>Weight: </b>10%</div>
+      <div class="subsect"><b>Due date: </b>March 15<sup>th</sup> 2024</div>
+      <div class="subsect"><b>Brief description: </b>
+      <p>In this assignment, you will develop a new course website for the course CSC B20 using HTML and CSS. You 
+          are not allowed to use any web framework such as BootStrap and JQuery etc. You may work individually or 
+          in groups of two or three. The webpage must be usable, responsive, and visually appealing. Below is an 
+          example course page, however it is up to you to create a design following the mandates listed in this 
+          assignment. I want you to have some fun with this assignment. There are some minimum requirements, but 
+          for the most part, there is a lot of creativity!</p>
+      </div>
+      <hr class="line-break">
+  </div>
+  <div class="assignment3">
+      <a href="mock.pdf"><h2>Assignment 3</h2></a>
+      <hr>
+      <div class="subsect first"><b>Topic: </b>Web Application and Database</div>
+      <div class="subsect"><b>Weight: </b>15%</div>
+      <div class="subsect"><b>Due date: </b>April 15<sup>th</sup> 2024</div>
+      <div class="subsect"><b>Brief description: </b>
+      <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris augue ipsum, rutrum vitae tincidunt 
+          cursus, gravida vel mauris. Duis posuere erat sed nulla molestie, nec pulvinar augue molestie. Mauris at 
+          mattis lacus. Nullam diam lectus, luctus a neque non, hendrerit placerat ligula. In ligula justo, aliquam et 
+          felis a, varius molestie mi. Nulla fringilla, ante quis sollicitudin facilisis, felis diam elementum nisi, 
+          nec volutpat neque lacus vel purus. Pellentesque habitant morbi tristique senectus et netus et malesuada 
+          fames ac turpis egestas. Etiam ac dapibus erat. Integer in tempus elit, in egestas dui. Vestibulum velit leo, 
+          pretium et lectus ac, molestie.</p>
+      </div>
+      <hr class="line-break">
+  </div>
+</main>
+{% endblock %}
+
