@@ -19,14 +19,14 @@ bcrypt = Bcrypt(app)
 
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String(50), unique = True, primary_key = True, nullable = False)
+    username = db.Column(db.String(50), unique = True, nullable = False)
     password = db.Column(db.Text, nullable = False)
     name = db.Column(db.String(250), nullable = False)
-    date_created = db.Column(db.Date)
+    date_created = db.Column(db.Date, default = datetime.utcnow)
     grades = db.relationship("Grades")
 
 class Test(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key = True, nullable = True)
     name = db.Column(db.String(250), nullable = False)
     desc = db.Column(db.Text)
     due_date = db.Column(db.Date)
@@ -103,6 +103,15 @@ def addtest():
 
     return "Success"
 
+@app.route('/grades')
+def view():
+    if(session["auth"] == 'instructor'):
+        students = Student.query.all()
+        return render_template("grades.html", students = students)
+    grades = Grades.query.filter_by(username = session["username"]).get()
+    tests = Test.query.all()
+    return render_template("grades.html", tests = tests, grades = grades)
+
 if __name__ == "__main__":
     app.run(debug=True)
 
@@ -111,3 +120,16 @@ if __name__ == "__main__":
 # student1 = Student(... = ....)
 # db.session.add(student1)
 # db.session.commit()
+    
+
+# student1 = Student(name = "Daniel Stevanus", username="student1", 
+#                     password = bcrypt.generate_password_hash("student1"),
+#                     )
+
+# student2 = Student(name = "Bobby Adi Salim", username="student2", 
+#                     password = bcrypt.generate_password_hash("student2"),
+#                     )
+
+# student3 = Student(name = "Ariella Siahaan", username="student3", 
+#                     password = bcrypt.generate_password_hash("student3"),
+#                     )
