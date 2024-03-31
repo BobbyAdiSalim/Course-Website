@@ -7,21 +7,37 @@
 
 {% block content %}
     <main>
-        <div class=student-search> Search for student: <input type: text></div>
+        <form action="/grade/{{ test_id }}" method="get">
+            <div class=student-search>
+                <input type="text" name="search" placeholder="Search for student">
+                <button type="submit">Search</button>
+            </div>
+        </form>
         <div class="grades-container">
             <div class="grades-header student-row">
                 <strong class="student-name">Name</strong>
                 <strong class="student-id">Student ID</strong>
                 <strong class="student-grade">Grade</strong>
             </div>
-            {% for student in lst_student %}
-                <div class="student-row">
-                    <span class="student-name">{{ student.name }}</span>
-                    <span class="student-id">{{ student.id }}</span>
-                    <span class="student-grade">100</span>
-                    <!-- if student name ada di lst_student_grades, then tampilin grades nya, if not tampilin empty -->
-                </div>
-            {% endfor %}
+            <form action="/grade/{{ test_id }}" method="post">
+                {% for student in lst_student %}
+                    <div class="student-row">
+                        <span class="student-name">{{ student.name }}</span>
+                        <span class="student-id">{{ student.id }}</span>
+                        {% for grade in lst_student_grades %}
+                            {% if grade.student.id == student.id %}
+                                {% set found = True %}
+                                    <span class="student-grade"><input type="number" value="{{ grade.grade }}" name="{{'student'+str(student.id)+'grades'}}"></span>
+                            {% endif %}
+                        {% endfor %}
+                        {% if not found %}
+                            <span class="student-grade"><input type="number" value=""></span>
+                        {% endif %}
+                        <!-- if student name ada di lst_student_grades, then tampilin grades nya, if not tampilin empty -->
+                    </div>
+                {% endfor %}
+            </form>
         </div>
+        <div class="add-button-container"><button class="add-button" type="submit">Submit Grades</button></div>
     </main>
 {% endblock %}

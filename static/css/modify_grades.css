@@ -2,18 +2,12 @@
     position: relative;
 }
 
-.assignment-container {
+.assignment-item {
     padding: 15px;
-}
-
-.assignment-header {
     background-color: #f0f0f0;
     position: relative;
     height: 50px;
     border-radius: 8px;
-}
-
-.assignment-item {
     border: solid;
     border-width: thin;
     border-color: #aaaaaa;
@@ -29,9 +23,13 @@
     top: 15px;
 }
 
-.assignment-title a{
+.assignment-title a {
     text-decoration: none;
-    color: #375390;
+    color: rgb(37, 53, 90);
+}
+
+.assignment-title a:hover {
+    text-decoration: underline;
 }
 
 .header-section {
