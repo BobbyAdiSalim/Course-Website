@@ -114,6 +114,7 @@ def view():
     if("auth" in session and session["auth"] == 'instructor'):
         students = Student.query.all()
         return render_template("modify_grades.html", students = students)
+        return render_template("modify_grades.html", students = students)
     grades = None
     # grades = Grades.query.filter_by(username = session["username"]).get()
     tests = Test.query.all()
@@ -153,6 +154,10 @@ def login():
 def register():
     pass
 
+
+@app.route('/modify_grades')
+def modify_grade():
+    return render_template("modify_grades.html", grades = True)
 
 if __name__ == "__main__":
     app.run(debug=True)

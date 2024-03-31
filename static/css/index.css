@@ -42,10 +42,12 @@ body {
     width: 60px;
     font-size: 2em;
     font-weight: bold;
-    border-radius: 70%;
+    border-radius: 50%;
     background-color: var(--primary_color); /* Customize the button color */
     color: white;
     text-align: center;
+    text-justify: center;
+    font-weight: 500;
     cursor: pointer;
     opacity: 50%;
 }
