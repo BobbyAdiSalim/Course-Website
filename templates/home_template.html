@@ -9,6 +9,7 @@
   <link href="{{ url_for('static', filename='css/navbar.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ url_for('static', filename='css/footer.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet" type="text/css">  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     {% block extra_css %}
     {% endblock %}
   
@@ -54,6 +55,9 @@
             <li> <a href="/labs" {% if labs %}
                 style = "font-weight: bold;"
               {% endif %}>Labs </a></li>
+            <li> <a href="/grades" {% if grades %}
+                style = "font-weight: bold;"
+              {% endif %}>Grades </a></li>
             <li> <a href="{{ url_for('static', filename = 'pdf/mock.pdf' ) }}" target="_blank">Syllabus </a></li>
             <li> <a href="https://piazza.com/class/lqy466htv8g5xb" target="_blank">Discussion Board </a></li>
             <li> <a href="https://markus2.utsc.utoronto.ca/courses/20" target="_blank">MarkUs </a></li>
@@ -107,6 +111,7 @@
       </div>
       <div class="footer-3 links">
         <div class="navigation">
+          <div><a href="/grades">Grades</a></div>
           <div><a href="{{ url_for('static', filename = 'pdf/mock.pdf' ) }}">Syllabus</a></div>
           <div><a href="https://piazza.com/class/lqy466htv8g5xb" target="_blank">Discussion Board</a></div>
           <div><a href="https://markus2.utsc.utoronto.ca/courses/20/assignments" target="_blank">MarkUs</a></div>

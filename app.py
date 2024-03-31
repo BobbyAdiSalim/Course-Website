@@ -85,6 +85,10 @@ def resources():
 def feedback():
     return render_template("feedback.html", feedback = True)
 
+@app.route("/grades")
+def grades():
+    return render_template("grades.html", feedback = True)
+
 @app.route('/tests/add', methods = ["GET", "POST"])
 def addtest():
     if request.method == 'GET':

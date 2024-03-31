@@ -1,0 +1,73 @@
+.assignment-container {
+    padding: 15px;
+}
+
+.assignment-header {
+    background-color: #f0f0f0;
+    position: relative;
+    height: 50px;
+}
+
+.assignment-item {
+    border: solid;
+    border-width: thin;
+    border-color: #aaaaaa;
+    margin-bottom: 10px;
+}
+
+
+.assignment-title {
+    position: absolute;
+    font-weight: 600;
+    font-size: 1.2em;
+    left: 15px;
+    top: 15px;
+}
+
+.header-section {
+    font-size: 0.8em;
+    position: absolute;
+}
+
+.header-section1 {
+    left: 15px;
+    bottom: 15px;
+    width: 80%;
+}
+
+.header-section .assignment{
+    margin-left: 5%;
+}
+
+.header-section .due-date {
+    margin-left: 0;
+    margin-right: 5%;
+}
+
+.more {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+}
+
+.more:hover {
+    text-decoration: underline;
+}
+
+.comment-container {
+    border: solid;
+    border-width: thin;
+    border-top: none;
+    border-color: #aaaaaa;
+    height: auto;
+    display: none;
+}
+
+.comment-title {
+    margin-bottom: 5px; 
+    font-size: 0.9em;
+}
+
+.comment {
+    font-size: 0.8em;
+}
