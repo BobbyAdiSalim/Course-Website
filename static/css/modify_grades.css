@@ -1,3 +1,7 @@
+.modify-grades-content {
+    position: relative;
+}
+
 .assignment-container {
     padding: 15px;
 }
@@ -61,10 +65,9 @@
     color: #ffffff;
     background-color: #007FA3;
     border-radius: 5px;
-    padding: 8px 10px;
+    padding: 12px 15px;
     font-size: 1em;
     font-weight: bold;
-    margin-bottom: 10px;
     border: solid;
     border-color: #aaaaaa;
     border-width: thin;
@@ -73,6 +76,11 @@
 .add-button-container {
     width: 100%;
     text-align: right;
+    position: sticky;
+    bottom: 5px;
+    z-index: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .add-button-container img {

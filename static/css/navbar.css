@@ -32,7 +32,7 @@ header {
     grid-area: header;
     background-color: var(--primary_color);
     padding: 10px 10px 10px 20px;
-    z-index: 1;
+    z-index: 10000;
     height: 70px;
     margin-bottom: 10px;
 }
