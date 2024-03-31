@@ -38,7 +38,8 @@ class Grades(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     student_id = db.Column(db.Integer, db.ForeignKey('student.id'), nullable = False)
     test_id = db.Column(db.Integer, db.ForeignKey('test.id'), nullable = False)
-
+    grade = db.Column(db.Float, nullable = False)
+    
 class Instructor(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(50), unique = True, nullable = False)
