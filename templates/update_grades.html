@@ -1,0 +1,17 @@
+{% extends 'home_template.html' %}
+
+{% block extra_css %}
+    
+{% endblock %}
+
+
+{% block content %}
+    <main>
+        {% for student in lst_student %}
+            <div>
+                {{ student.name }}
+                <!-- if student name ada di lst_student_grades, then tampilin grades nya, if not tampilin empty -->
+            </div>
+        {% endfor %}
+    </main>
+{% endblock %}

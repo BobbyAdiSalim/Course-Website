@@ -38,6 +38,7 @@ class Grades(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     student_id = db.Column(db.Integer, db.ForeignKey('student.id'), nullable = False)
     test_id = db.Column(db.Integer, db.ForeignKey('test.id'), nullable = False)
+    grade = db.Column(db.Float, nullable = False)
 
 class Instructor(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -179,6 +180,18 @@ def logout():
     session.pop("auth", default=None)
     session.pop("name", default=None)
     return redirect('/')
+
+@app.route('/grades/<test_id>')
+def edit_grades(test_id):
+    if "auth" not in session or session["auth"] != "instructor":
+        return redirect('/')
+    lst_student_grades = Grades.query.filter_by(id = test_id).all()
+    lst_student = Student.query.all()
+    return render_template('update_grades.html', lst_student_grades = lst_student_grades, lst_student = lst_student)
+
+    pass
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 
