@@ -96,12 +96,14 @@ def addtest():
         due_date = request.form["due_date"]
 
         # Convert to SQLite date
-        due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
-    test = Test(name = name, desc = desc, due_date = due_date)
-    db.session.add(test)
-    db.session.commit()
+        if(due_date != ""):
+            due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
 
-    return "Success"
+        test = Test(name = name, desc = desc, due_date = due_date)
+        db.session.add(test)
+        db.session.commit()
+
+        return "Success"
 
 @app.route('/grades')
 def view():
