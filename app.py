@@ -264,7 +264,7 @@ def edit_grades(test_id):
 def delete_test(test_id):
     if(not isInstructor(session)):
        return redirect('/')
-    test = Test.query.filter_by(test_id = test_id).first()
+    test = Test.query.filter_by(id = test_id).first()
     db.session.delete(test)
     db.session.commit()
 
