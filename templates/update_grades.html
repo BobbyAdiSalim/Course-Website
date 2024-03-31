@@ -32,15 +32,16 @@
                                 {% endif %}
                             {% endfor %}
 
-                            {% if found == False %}
-                                <span class="student-grade"><input type="number" value="" name="student{{ student.id }}_grade   "></span>
-                            {% endif %}
-                            <!-- if student name ada di lst_student_grades, then tampilin grades nya, if not tampilin empty -->
-                        </div>
-                    {% endfor %}
-            </div>
-            <div class="add-button-container"><button class="add-button" type="submit">Submit Grades</button></div>
-        </form>
+                        {% if found == False %}
+                            <span class="student-grade"><input type="number" value="" name="student{{ student.id }}_grade   "></span>
+                        {% endif %}
+                        <!-- if student name ada di lst_student_grades, then tampilin grades nya, if not tampilin empty -->
+                    </div>
+                {% endfor %}
+
+                <div class="add-button-container"><button class="add-button" type="submit">Submit Grades</button></div>
+            </form>
+        </div>
         
     </main>
 {% endblock %}
