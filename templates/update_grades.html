@@ -24,6 +24,7 @@
                     <div class="student-row">
                         <span class="student-name">{{ student.name }}</span>
                         <span class="student-id">{{ student.id }}</span>
+                        {% set found = False %}
                         {% for grade in lst_student_grades %}
                             {% if grade.student.id == student.id %}
                                 {% set found = True %}
