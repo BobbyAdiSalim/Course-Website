@@ -112,11 +112,15 @@ def addtest():
 def view():
     if("auth" in session and session["auth"] == 'instructor'):
         students = Student.query.all()
-        return render_template("grades.html", students = students)
+        return render_template("modify_grades.html", students = students)
     grades = None
     # grades = Grades.query.filter_by(username = session["username"]).get()
     tests = Test.query.all()
     return render_template("grades.html", tests = tests, grades = grades)
+
+@app.route('/modify_grades')
+def modify_grade():
+    return render_template("modify_grades.html", grades = True)
 
 if __name__ == "__main__":
     app.run(debug=True)
