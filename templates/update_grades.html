@@ -24,7 +24,7 @@
                     <div class="student-row">
                         <span class="student-name">{{ student.name }}</span>
                         <span class="student-id">{{ student.id }}</span>
-                        {% set found = False %}
+                        {% set found = %}
                         {% for grade in lst_student_grades %}
                             {% if grade.student.id == student.id %}
                                 {% set found = True %}
@@ -33,7 +33,7 @@
                         {% endfor %}
 
                         {% if found == False %}
-                            <span class="student-grade"><input type="number" value="" name="student{{ student.id }}_grade"></span>
+                            <span class="student-grade"><input type="number" value="" name="student{{ student.id }}_grade   "></span>
                         {% endif %}
                         <!-- if student name ada di lst_student_grades, then tampilin grades nya, if not tampilin empty -->
                     </div>
