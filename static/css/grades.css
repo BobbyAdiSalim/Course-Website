@@ -6,6 +6,7 @@
     background-color: #f0f0f0;
     position: relative;
     height: 50px;
+    border-radius: 8px;
 }
 
 .assignment-item {
@@ -13,8 +14,8 @@
     border-width: thin;
     border-color: #aaaaaa;
     margin-bottom: 10px;
+    border-radius: 8px;
 }
-
 
 .assignment-title {
     position: absolute;
@@ -55,10 +56,6 @@
 }
 
 .comment-container {
-    border: solid;
-    border-width: thin;
-    border-top: none;
-    border-color: #aaaaaa;
     height: auto;
     display: none;
 }
