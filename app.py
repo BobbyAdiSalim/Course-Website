@@ -159,6 +159,11 @@ def register():
 def modify_grade():
     return render_template("modify_grades.html", grades = True)
 
+@app.route('/logout')
+def logout():
+    session.pop("auth", default=None)
+    session.pop("name", default=None)
+    return redirect('/')
 if __name__ == "__main__":
     app.run(debug=True)
 
