@@ -1,25 +1,27 @@
 {% extends 'home_template.html' %}
 
 {% block extra_css %}
-    
+<link href="{{ url_for('static', filename='css/update_grades.css') }}" rel="stylesheet" type="text/css">
 {% endblock %}
 
 
 {% block content %}
     <main>
-        {% for student in lst_student %}
-            <div>
-                {{ student.name }}
-                
-                {% for grade_info in lst_student_grades %}
-
-                     {% if grade_info.student.id == student.id %}
-                        {{ grade_info.grade }}
-                     {% endif %}
-                     
-                {% endfor %}
-                <!-- if student name ada di lst_student_grades, then tampilin grades nya, if not tampilin empty -->
+        <div class=student-search> Search for student: <input type: text></div>
+        <div class="grades-container">
+            <div class="grades-header student-row">
+                <strong class="student-name">Name</strong>
+                <strong class="student-id">Student ID</strong>
+                <strong class="student-grade">Grade</strong>
             </div>
-        {% endfor %}
+            {% for student in lst_student %}
+                <div class="student-row">
+                    <span class="student-name">{{ student.name }}</span>
+                    <span class="student-id">{{ student.id }}</span>
+                    <span class="student-grade">100</span>
+                    <!-- if student name ada di lst_student_grades, then tampilin grades nya, if not tampilin empty -->
+                </div>
+            {% endfor %}
+        </div>
     </main>
 {% endblock %}
