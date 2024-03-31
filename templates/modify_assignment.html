@@ -6,7 +6,21 @@
 
 {% block content %}
 <main class="modify-grades-content">
-
+    {% with messages = get_flashed_messages(with_categories = True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class=" alert
+               {% if category == 'Success' %}
+               alert-success
+               {% else %}
+               alert-failed
+               {% endif %} ">
+            
+            {{ message }}
+        </div>
+            {% endfor %}
+    {% endif %}
+    {% endwith %}
     {% for test in lst_tests %}
     
     <div class="assignment-item">
@@ -16,12 +30,12 @@
             <span class="assignment assignment-weight">Weight: 8%</span>
         </div>
         <div class="action-buttons">
-            <a><img class="edit-button" src="{{url_for('static', filename='images/edit.png')}}"></a>
-            <a><img class="del-button" src="{{url_for('static', filename='images/trash.png')}}"></a>
+            <a href="/grades/{{ test.id }}/edit"><img class="edit-button" src="{{url_for('static', filename='images/edit.png')}}"></a>
+            <a href="/grades/{{ test.id }}/delete"><img class="del-button" src="{{url_for('static', filename='images/trash.png')}}"></a>
         </div>    
     </div>   
     
     {% endfor %}
-    <div class="add-button-container"><button class="add-button"><img src="{{url_for('static', filename='images/plus-white.png')}}" height="13px;" alt="add">Add Assignment</button></div>
+    <div class="add-button-container"><a href="/grades/add"><button class="add-button"><img src="{{url_for('static', filename='images/plus-white.png')}}" height="13px;" alt="add">Add Assignment</button></a></div>
 </main>
 {% endblock %}
