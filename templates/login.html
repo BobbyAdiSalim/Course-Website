@@ -1,0 +1,17 @@
+{% extends 'home_template.html' %}
+
+{% block extra_css %}
+    
+{% endblock %}
+
+{% block content %}
+    <main>
+        <form action="/login" method ="post">
+            <input type="text" name ="username" required>
+            <input type="password" name ="password" required>
+            <button type="submit">Login</button>
+
+            No have account? <a href="">Create an account</a>
+        </form>
+    </main>
+{% endblock %}

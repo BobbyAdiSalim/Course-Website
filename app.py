@@ -5,7 +5,8 @@ from flask import (
     url_for,
     session,
     abort,
-    flash
+    flash,
+    redirect
     )
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
@@ -113,10 +114,48 @@ def view():
     if("auth" in session and session["auth"] == 'instructor'):
         students = Student.query.all()
         return render_template("modify_grades.html", students = students)
+        return render_template("modify_grades.html", students = students)
     grades = None
     # grades = Grades.query.filter_by(username = session["username"]).get()
     tests = Test.query.all()
     return render_template("grades.html", tests = tests, grades = grades)
+
+
+@app.route('/loginInstructor')
+def login_instructor():
+    session["auth"] = "instructor"
+    return "You are instructor now, love you"
+
+
+@app.route('/login', methods = ["GET", "POST"])
+def login():
+    if(request.method == "GET"):
+        return render_template("login.html")
+
+    if(request.method == "POST"):
+        if('username' in request.form) and ('password' in request.form):
+            usernames = Student.query.with_entities(Student.username).all()
+
+            input_username = request.form["username"]
+            input_password = request.form["password"]
+            return str(usernames)
+            if(input_username in usernames):
+                
+                student = Student.query.filter_by(username = input_username).first()
+                hashed_password = student['password']
+                if bcrypt.check_password_hash(hashed_password, input_password):
+                    session["auth"] = "student"
+                    session["name"] = student["name"]
+                    return redirect("/")
+                
+            return "login failed"
+
+    pass
+
+@app.route('/register', methods = ["GET", "POST"])
+def register():
+    pass
+
 
 @app.route('/modify_grades')
 def modify_grade():
@@ -132,14 +171,14 @@ if __name__ == "__main__":
 # db.session.commit()
     
 
-# student1 = Student(name = "Daniel Stevanus", username="student1", 
-#                     password = bcrypt.generate_password_hash("student1"),
-#                     )
+student1 = Student(name = "Daniel Stevanus", username="student1", 
+                    password = bcrypt.generate_password_hash("student1"),
+                    )
 
-# student2 = Student(name = "Bobby Adi Salim", username="student2", 
-#                     password = bcrypt.generate_password_hash("student2"),
-#                     )
+student2 = Student(name = "Bobby Adi Salim", username="student2", 
+                    password = bcrypt.generate_password_hash("student2"),
+                    )
 
-# student3 = Student(name = "Ariella Siahaan", username="student3", 
-#                     password = bcrypt.generate_password_hash("student3"),
-#                     )
+student3 = Student(name = "Ariella Siahaan", username="student3", 
+                    password = bcrypt.generate_password_hash("student3"),
+                    )
