@@ -251,7 +251,7 @@ def edit_grades(test_id):
         lst_students = Student.query.all()
         for student in lst_students:
             grade = request.form["student"+str(student.id)+"_grade"]
-            grade_before = Grades.query.f9ilter(Grades.student_id == student.id and Grades.test_id == test_id).first()
+            grade_before = Grades.query.filter(Grades.student_id == student.id and Grades.test_id == test_id).first()
             if(grade_before):
                 db.session.query(Grades).filter(Grades.student_id == student.id and Grades.test_id == test_id).update({'grade' : grade})
             else:
@@ -259,7 +259,8 @@ def edit_grades(test_id):
                 db.session.add(new_grade)
 
         db.session.commit()
-
+        return redirect('/grades/'+str(test_id))
+    
 @app.route('/grades/<test_id>/delete')
 def delete_test(test_id):
     if(not isInstructor(session)):
