@@ -133,18 +133,16 @@ def login():
 
     if(request.method == "POST"):
         if('username' in request.form) and ('password' in request.form):
-            usernames = Student.query.with_entities(Student.username).all()
 
             input_username = request.form["username"]
             input_password = request.form["password"]
-            return str(usernames)
-            if(input_username in usernames):
-                
-                student = Student.query.filter_by(username = input_username).first()
-                hashed_password = student['password']
+            
+            student = Student.query.filter_by(username = input_username).first()
+            if(student):
+                hashed_password = student.password
                 if bcrypt.check_password_hash(hashed_password, input_password):
                     session["auth"] = "student"
-                    session["name"] = student["name"]
+                    session["name"] = student.name
                     return redirect("/")
                 
             return "login failed"
