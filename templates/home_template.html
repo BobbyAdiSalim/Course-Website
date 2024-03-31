@@ -26,7 +26,7 @@
           Appplications</a></div>
         <div class="header-flex-2"> 
           
-          {% if "name" in session %}
+          {% if "auth" in session %}
           <div>Hello, <b>{{ session["name"] }}</b></div>
           <small><div><a href="/logout" style="padding: 0;">Logout</a></div></small>
           {% else %}  

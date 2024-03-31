@@ -24,7 +24,7 @@ class Student(db.Model):
     password = db.Column(db.Text, nullable = False)
     name = db.Column(db.String(250), nullable = False)
     date_created = db.Column(db.Date, default = datetime.utcnow)
-    grades = db.relationship("Grades")
+    grades = db.relationship("Grades", backref = 'student', lazy = True)
 
 class Test(db.Model):
     id = db.Column(db.Integer, primary_key = True, nullable = True)
@@ -32,7 +32,7 @@ class Test(db.Model):
     desc = db.Column(db.Text)
     weight = db.Column(db.Integer, nullable = False)
     due_date = db.Column(db.Date)
-    grades = db.relationship("Grades")
+    grades = db.relationship("Grades", backref = 'test', lazy = True)
 
 class Grades(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -148,7 +148,7 @@ def login_instructor():
 @app.route('/login', methods = ["GET", "POST"])
 def login():
     if "auth" in session:
-        return redirect('/')
+         return redirect('/')
     
     if(request.method == "GET"):
         return render_template("login.html")
@@ -173,7 +173,31 @@ def login():
 
 @app.route('/register', methods = ["GET", "POST"])
 def register():
-    pass
+    if request.method == "GET":
+        return render_template("register.html")
+    
+    if request.method == "POST":
+        lst_usernames = Student.query.with_entities(Student.username).all()
+
+        input_username = request.form["username"]
+        input_password = bcrypt.generate_password_hash(request.form["password"])
+        input_name = request.form["name"]
+        if (input_username == "" or input_password == "" or input_name ==""):
+            flash("Invalid username and password!", "Invalid Input")
+            return redirect('/register')
+        
+        if(input_username in lst_usernames):
+            flash("Username already taken", "Invalid Input")
+            return redirect('/register')
+        
+
+        # Done check now create
+        new_student = Student(username = input_username, password = input_password, name = input_name)
+        db.session.add(new_student)
+        db.session.commit()
+
+        flash("Account created! Please login", "Register Success")
+        return redirect('/login')
 
 @app.route('/logout')
 def logout():
@@ -185,11 +209,9 @@ def logout():
 def edit_grades(test_id):
     if "auth" not in session or session["auth"] != "instructor":
         return redirect('/')
-    lst_student_grades = Grades.query.filter_by(id = test_id).all()
+    lst_student_grades = Grades.query.filter_by(test_id = test_id).all()
     lst_student = Student.query.all()
     return render_template('update_grades.html', lst_student_grades = lst_student_grades, lst_student = lst_student)
-
-    pass
 
 
 if __name__ == "__main__":
