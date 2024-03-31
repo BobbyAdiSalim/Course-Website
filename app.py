@@ -106,7 +106,7 @@ def feedback():
         return redirect('/')
     return render_template("feedback.html", feedback = True)
 
-@app.route('/tests/add', methods = ["GET", "POST"])
+@app.route('/grades/add', methods = ["GET", "POST"])
 def addtest():
     if request.method == 'GET':
         return render_template("tests_add.html")
@@ -158,16 +158,27 @@ def login():
 
             input_username = request.form["username"]
             input_password = request.form["password"]
+            input_status = request.form["status"]
+
+            if(input_status == "Student"):
+                student = Student.query.filter_by(username = input_username).first()
+                if(student):
+                    hashed_password = student.password
+                    if bcrypt.check_password_hash(hashed_password, input_password):
+                        session["auth"] = "student"
+                        session["name"] = student.name
+                        return redirect("/")
+            else:
+                instructor = Instructor.query.filter_by(username = input_username).first()
+                if(instructor):
+                    hashed_password = instructor.password
+                    if bcrypt.check_password_hash(hashed_password, input_password):
+                        session["auth"] = "instructor"
+                        session["name"] = instructor.name
+                        return redirect("/")
             
-            student = Student.query.filter_by(username = input_username).first()
-            if(student):
-                hashed_password = student.password
-                if bcrypt.check_password_hash(hashed_password, input_password):
-                    session["auth"] = "student"
-                    session["name"] = student.name
-                    return redirect("/")
-                
-            return "login failed"
+            flash("Login failed! Invalid credentials", "Failed")
+            return redirect("/login")
 
     pass
 
@@ -205,14 +216,31 @@ def logout():
     session.pop("name", default=None)
     return redirect('/')
 
-@app.route('/grades/<test_id>')
+@app.route('/grades/<test_id>', methods = ["GET", "POST"])
 def edit_grades(test_id):
+
     if "auth" not in session or session["auth"] != "instructor":
         return redirect('/')
-    lst_student_grades = Grades.query.filter_by(test_id = test_id).all()
-    lst_student = Student.query.all()
-    return render_template('update_grades.html', lst_student_grades = lst_student_grades, lst_student = lst_student)
+    
+    if(request.method == "GET"):
+        lst_student_grades = Grades.query.filter_by(test_id = test_id).all()
+        lst_student = Student.query.all()
 
+        
+        return render_template('update_grades.html', lst_student_grades = lst_student_grades, lst_student = lst_student)
+
+    if(request.method == "POST"):
+        lst_students = Student.query.all()
+        for student in lst_students:
+            grade = request.form["student"+str(student.id)+"_grade"]
+            grade_before = Grades.query.f9ilter(Grades.student_id == student.id and Grades.test_id == test_id).first()
+            if(grade_before):
+                db.session.query(Grades).filter(Grades.student_id == student.id and Grades.test_id == test_id).update({'grade' : grade})
+            else:
+                new_grade = Grades(student_id = student.id, test_id = test_id, grade = grade)
+                db.session.add(new_grade)
+
+        db.session.commit()
 
 if __name__ == "__main__":
     app.run(debug=True)

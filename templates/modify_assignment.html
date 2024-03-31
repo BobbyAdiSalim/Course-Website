@@ -19,14 +19,14 @@
                 <span class="assignment assignment-weight">Weight: 8%</span>
             </div>
             <div class="action-buttons">
-                <a><img class="edit-button" src="{{url_for('static', filename='images/edit.png')}}"></a>
-                <a><img class="del-button" src="{{url_for('static', filename='images/trash.png')}}"></a>
+                <a href="/grades/{{ test.id }}/edit"><img class="edit-button" src="{{url_for('static', filename='images/edit.png')}}"></a>
+                <a href="/grades/{{ test.id }}/delete"><img class="del-button" src="{{url_for('static', filename='images/trash.png')}}"></a>
             </div>
         </div>
     
     </div>   
     
     {% endfor %}
-    <div class="add-button-container"><button class="add-button"><img src="{{url_for('static', filename='images/plus-white.png')}}" height="13px;" alt="add">Add Assignment</button></div>
+    <div class="add-button-container"><a href="/grades/add"><button class="add-button"><img src="{{url_for('static', filename='images/plus-white.png')}}" height="13px;" alt="add">Add Assignment</button></a></div>
 </main>
 {% endblock %}
