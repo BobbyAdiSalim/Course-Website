@@ -43,6 +43,7 @@
             <li> <a href="/" {% if home %}
                 style = "font-weight: bold;"
               {% endif %}>Home</a></li>
+            {% if "auth" in session %}
             <li> <a href="/news" {% if news %}
                 style = "font-weight: bold;"
               {% endif %}>News </a></li>
@@ -76,6 +77,7 @@
             <li> <a href="/feedback" {% if feedback %}
                 style = "font-weight: bold;"
               {% endif %}>Anonymous Feedback </a></li>
+            {% endif %}
           </ul>
         </div>
       </div>
