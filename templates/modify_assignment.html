@@ -6,7 +6,21 @@
 
 {% block content %}
 <main class="modify-grades-content">
-
+    {% with messages = get_flashed_messages(with_categories = True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class=" alert
+               {% if category == 'Success' %}
+               alert-success
+               {% else %}
+               alert-failed
+               {% endif %} ">
+            
+            {{ message }}
+        </div>
+            {% endfor %}
+    {% endif %}
+    {% endwith %}
     {% for test in lst_tests %}
     
     <div class="assignment-item">

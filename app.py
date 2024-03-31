@@ -265,6 +265,11 @@ def delete_test(test_id):
     if(not isInstructor(session)):
        return redirect('/')
     test = Test.query.filter_by(id = test_id).first()
+
+    related_grades = Grades.query.filter_by(test_id = test_id).all()
+
+    for grade in related_grades:
+        db.session.delete(grade)
     db.session.delete(test)
     db.session.commit()
 
