@@ -24,7 +24,15 @@
     <div class="header-flex">
       <div class="header-flex-1 title"><a href="/" class="title">CSCB20: Introduction to Database and Web
           Appplications</a></div>
-        <div class="header-flex-2"> <a href="/login"> Login </a></div>
+        <div class="header-flex-2"> 
+          
+          {% if "name" in session %}
+          <div>Hello, <b>{{ session["name"] }}</b></div>
+          <small><div><a href="/logout" style="padding: 0;">Logout</a></div></small>
+          {% else %}  
+          <a href="/login"> Login </a>
+          {% endif %}
+        </div>
     </div>
   </header>
   <div class="container">
@@ -35,6 +43,7 @@
             <li> <a href="/" {% if home %}
                 style = "font-weight: bold;"
               {% endif %}>Home</a></li>
+            {% if "auth" in session %}
             <li> <a href="/news" {% if news %}
                 style = "font-weight: bold;"
               {% endif %}>News </a></li>
@@ -68,6 +77,7 @@
             <li> <a href="/feedback" {% if feedback %}
                 style = "font-weight: bold;"
               {% endif %}>Anonymous Feedback </a></li>
+            {% endif %}
           </ul>
         </div>
       </div>
@@ -96,9 +106,7 @@
       </div>
       <div class="footer-2 links">
         <div class="navigation">
-          <div><a href="/" {% if home %}
-            style = "font-weight: bold;"
-          {% endif %}>Home</a></div>
+          <div><a href="/">Home</a></div>
           <div><a href="/news">News</a></div>
           <div><a href="/calendar">Calendar</a></div>
           <div><a href="/lectures">Lectures</a></div>
