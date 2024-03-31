@@ -29,6 +29,7 @@ class Test(db.Model):
     id = db.Column(db.Integer, primary_key = True, nullable = True)
     name = db.Column(db.String(250), nullable = False)
     desc = db.Column(db.Text)
+    weight = db.Column(db.Integer, nullable = False)
     due_date = db.Column(db.Date)
     grades = db.relationship("Grades")
 
@@ -93,13 +94,15 @@ def addtest():
         # Do something here
         name = request.form["name"]
         desc = request.form["desc"]
+        weight = request.form["weight"]
         due_date = request.form["due_date"]
 
         # Convert to SQLite date
         if(due_date != ""):
             due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
-
-        test = Test(name = name, desc = desc, due_date = due_date)
+        else:
+            due_date = None
+        test = Test(name = name, desc = desc, due_date = due_date, weight = weight)
         db.session.add(test)
         db.session.commit()
 
@@ -107,10 +110,11 @@ def addtest():
 
 @app.route('/grades')
 def view():
-    if(session["auth"] == 'instructor'):
+    if("auth" in session and session["auth"] == 'instructor'):
         students = Student.query.all()
         return render_template("grades.html", students = students)
-    grades = Grades.query.filter_by(username = session["username"]).get()
+    grades = None
+    # grades = Grades.query.filter_by(username = session["username"]).get()
     tests = Test.query.all()
     return render_template("grades.html", tests = tests, grades = grades)
 
