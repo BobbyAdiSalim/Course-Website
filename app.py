@@ -169,14 +169,14 @@ if __name__ == "__main__":
 # db.session.commit()
     
 
-student1 = Student(name = "Daniel Stevanus", username="student1", 
-                    password = bcrypt.generate_password_hash("student1"),
-                    )
+# student1 = Student(name = "Daniel Stevanus", username="student1", 
+#                     password = bcrypt.generate_password_hash("student1"),
+#                     )
 
-student2 = Student(name = "Bobby Adi Salim", username="student2", 
-                    password = bcrypt.generate_password_hash("student2"),
-                    )
+# student2 = Student(name = "Bobby Adi Salim", username="student2", 
+#                     password = bcrypt.generate_password_hash("student2"),
+#                     )
 
-student3 = Student(name = "Ariella Siahaan", username="student3", 
-                    password = bcrypt.generate_password_hash("student3"),
-                    )
+# student3 = Student(name = "Ariella Siahaan", username="student3", 
+#                     password = bcrypt.generate_password_hash("student3"),
+#                     )
