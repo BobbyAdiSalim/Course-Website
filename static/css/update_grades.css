@@ -1,0 +1,30 @@
+.grades-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f0f0; /* Grayish background color */
+    padding: 10px 20px;
+    margin-top: 15px;
+}
+
+.student-row {
+    display: flex;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.student-name {
+    width: 40%;
+}
+
+.student-id {
+    width: 40%;
+}
+
+.student-grade {
+    width: 20%;
+}
+
+.student-search {
+    margin-top: 10px;
+}
