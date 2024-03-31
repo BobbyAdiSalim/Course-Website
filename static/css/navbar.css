@@ -62,7 +62,7 @@ header .title{
     padding-right: 15px;
 }
 
-.header-flex-2 a {
+.header-flex-2 a , .header-flex-2 div{
     color: white;
     text-decoration: none;
     background-image: linear-gradient(
