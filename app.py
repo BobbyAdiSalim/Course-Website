@@ -130,13 +130,12 @@ def addtest():
 
 @app.route('/grades')
 def view():
+    lst_tests = Test.query.all()
+    lst_grades = None
     if("auth" in session and session["auth"] == 'instructor'):
         students = Student.query.all()
-        return render_template("modify_grades.html", students = students)
-        return render_template("modify_grades.html", students = students)
-    lst_grades = None 
+        return render_template("modify_assignment.html", lst_tests = lst_tests, grades = True, lst_grades = lst_grades)
     # grades = Grades.query.filter_by(username = session["username"]).get()
-    lst_tests = Test.query.all()
     return render_template("grades.html", lst_tests = lst_tests, grades = True, lst_grades = lst_grades)
 
 
@@ -175,11 +174,6 @@ def login():
 @app.route('/register', methods = ["GET", "POST"])
 def register():
     pass
-
-
-@app.route('/modify_grades')
-def modify_grade():
-    return render_template("modify_grades.html", grades = True)
 
 @app.route('/logout')
 def logout():
