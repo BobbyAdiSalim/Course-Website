@@ -41,7 +41,7 @@ class Grades(db.Model):
 
 class Instructor(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String(50), unique = True, primary_key = True, nullable = False)
+    username = db.Column(db.String(50), unique = True, nullable = False)
     password = db.Column(db.Text, nullable = False)
     name = db.Column(db.String(250), nullable = False)
     date_created = db.Column(db.Date)
@@ -53,38 +53,56 @@ def home():
 
 @app.route("/labs")
 def labs():
+    if "auth" not in session:
+        return redirect('/')
     return render_template("labs.html", labs = True)
 
 @app.route("/news")
 def news():
+    if "auth" not in session:
+        return redirect('/')
     return render_template("news.html", news = True)
 
 @app.route("/calendar")
 def calendar():
+    if "auth" not in session:
+        return redirect('/')
     return render_template("calendar.html", calendar = True)
 
 @app.route("/lectures")
 def lectures():
+    if "auth" not in session:
+        return redirect('/')
     return render_template("lectures.html", lectures = True)
 
 @app.route("/assignments")
 def assignments():
+    if "auth" not in session:
+        return redirect('/')
     return render_template("assignments.html", assignments = True)
 
 @app.route("/tests")
 def tests():
+    if "auth" not in session:
+        return redirect('/')
     return render_template("tests.html", tests = True)
 
 @app.route("/team")
 def team():
+    if "auth" not in session:
+        return redirect('/')
     return render_template("team.html", team = True)
 
 @app.route("/resources")
 def resources():
+    if "auth" not in session:
+        return redirect('/')
     return render_template("resources.html", resources = True)
 
 @app.route("/feedback")
 def feedback():
+    if "auth" not in session:
+        return redirect('/')
     return render_template("feedback.html", feedback = True)
 
 @app.route('/tests/add', methods = ["GET", "POST"])
@@ -129,6 +147,9 @@ def login_instructor():
 
 @app.route('/login', methods = ["GET", "POST"])
 def login():
+    if "auth" in session:
+        return redirect('/')
+    
     if(request.method == "GET"):
         return render_template("login.html")
 
@@ -184,4 +205,12 @@ if __name__ == "__main__":
 
 # student3 = Student(name = "Ariella Siahaan", username="student3", 
 #                     password = bcrypt.generate_password_hash("student3"),
+#                     )
+    
+# instructor1 = Instructor(name = "Purva Gawde", username="instructor1", 
+#                     password = bcrypt.generate_password_hash("instructor1"),
+#                     )
+    
+# instructor2 = Instructor(name = "Pourya Moghadam", username="instructor2", 
+#                     password = bcrypt.generate_password_hash("instructor2"),
 #                     )
