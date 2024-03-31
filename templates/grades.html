@@ -17,7 +17,7 @@
             <div class="header-section header-section1">
                 <span class="assignment due-date">Due date: {{ test.due_date }}</span>
                 <span class="assignment assignment-grade">Grade: 90/110</span>
-                <span class="assignment assignment-weight">Weight: {{ test.weight }}</span>
+                <span class="assignment assignment-weight">Weight: {{ test.weight }}%</span>
             </div>
             <div class="header-section more">More</div>
         </div>
@@ -29,23 +29,6 @@
         </div>
     </div>
     {% endfor %}
-    
-    <div class="assignment-item">
-        <div class="assignment-container assignment-header">
-            <div class="assignment assignment-title">Midterm</div>
-            <div class="header-section header-section1">
-                <span class="assignment due-date">Due date: 20 February 2024</span>
-                <span class="assignment assignment-grade">Grade: 100/100</span>
-                <span class="assignment assignment-weight">Weight: 30%</span>
-            </div>
-            <div class="header-section more"><a>More</a></div>
-        </div>
-        <div class="assignment-container comment-container">
-            <div class="comment-title">Comment:</div>
-            <div class="comment">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam magni voluptates ullam mollitia, labore, minima ipsam eveniet, sint consequatur rem accusamus! Possimus neque libero, adipisci ea officiis totam assumenda. Modi eos incidunt eveniet dolore neque ex saepe possimus voluptatem tempora necessitatibus exercitationem adipisci commodi vero at asperiores, esse ducimus ad.
-            </div>
-        </div>
-    </div>
+
 </main>
 {% endblock %}
