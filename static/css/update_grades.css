@@ -29,6 +29,11 @@
     border-left-style: none;
 }
 
+.student-search button:hover {
+    background-color: rgb(18, 26, 45);
+    text-decoration: underline;
+}
+
 .grades-container {
     display: flex;
     flex-direction: column;
@@ -73,11 +78,18 @@
 
 .student-grade input {
     width: 50%;
+    min-width: 2em;
     padding: 3px 5px;
     border-radius: 3px;
     border-width: thin;
     border-style: solid;
     border-color: #333;
+}
+
+.student-grade input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .add-button {
