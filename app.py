@@ -115,10 +115,10 @@ def view():
         students = Student.query.all()
         return render_template("modify_grades.html", students = students)
         return render_template("modify_grades.html", students = students)
-    grades = None
+    lst_grades = None 
     # grades = Grades.query.filter_by(username = session["username"]).get()
-    tests = Test.query.all()
-    return render_template("grades.html", tests = tests, grades = grades)
+    lst_tests = Test.query.all()
+    return render_template("grades.html", lst_tests = lst_tests, grades = True, lst_grades = lst_grades)
 
 
 @app.route('/loginInstructor')
