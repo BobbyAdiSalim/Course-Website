@@ -47,6 +47,15 @@ class Instructor(db.Model):
     name = db.Column(db.String(250), nullable = False)
     date_created = db.Column(db.Date)
 
+def isInstructor(identity):
+    if "auth" in identity and identity["auth"] == 'Instructor':
+        return True
+    return False
+
+def isStudent(identity):
+    if "auth" in identity and identity["auth"] == 'Student':
+        return True
+    return False
 
 @app.route("/")
 def home():
@@ -54,60 +63,62 @@ def home():
 
 @app.route("/labs")
 def labs():
-    if "auth" not in session:
+    if not isInstructor(session) and not isStudent(session):
         return redirect('/')
     return render_template("labs.html", labs = True)
 
 @app.route("/news")
 def news():
-    if "auth" not in session:
+    if not isInstructor(session) and not isStudent(session):
         return redirect('/')
     return render_template("news.html", news = True)
 
 @app.route("/calendar")
 def calendar():
-    if "auth" not in session:
+    if not isInstructor(session) and not isStudent(session):
         return redirect('/')
     return render_template("calendar.html", calendar = True)
 
 @app.route("/lectures")
 def lectures():
-    if "auth" not in session:
+    if not isInstructor(session) and not isStudent(session):
         return redirect('/')
     return render_template("lectures.html", lectures = True)
 
 @app.route("/assignments")
 def assignments():
-    if "auth" not in session:
+    if not isInstructor(session) and not isStudent(session):
         return redirect('/')
     return render_template("assignments.html", assignments = True)
 
 @app.route("/tests")
 def tests():
-    if "auth" not in session:
+    if not isInstructor(session) and not isStudent(session):
         return redirect('/')
     return render_template("tests.html", tests = True)
 
 @app.route("/team")
 def team():
-    if "auth" not in session:
+    if not isInstructor(session) and not isStudent(session):
         return redirect('/')
     return render_template("team.html", team = True)
 
 @app.route("/resources")
 def resources():
-    if "auth" not in session:
+    if not isStudent(session) and not isInstructor(session):
         return redirect('/')
     return render_template("resources.html", resources = True)
 
 @app.route("/feedback")
 def feedback():
-    if "auth" not in session:
+    if not isStudent(session):
         return redirect('/')
     return render_template("feedback.html", feedback = True)
 
 @app.route('/grades/add', methods = ["GET", "POST"])
 def addtest():
+    if not isInstructor(session):
+        return redirect('/')
     if request.method == 'GET':
         return render_template("tests_add.html")
     else:
@@ -128,26 +139,18 @@ def addtest():
 
         return "Success"
 
-@app.route('/grades')
-def view():
-    lst_tests = Test.query.all()
-    lst_grades = None
-    if("auth" in session and session["auth"] == 'instructor'):
-        students = Student.query.all()
-        return render_template("modify_assignment.html", lst_tests = lst_tests, grades = True, lst_grades = lst_grades)
-    # grades = Grades.query.filter_by(username = session["username"]).get()
-    return render_template("grades.html", lst_tests = lst_tests, grades = True, lst_grades = lst_grades)
 
 
 @app.route('/loginInstructor')
 def login_instructor():
-    session["auth"] = "instructor"
+    session["auth"] = "Instructor"
+    session["name"] = "Dummy Ins"
     return "You are instructor now, love you"
 
 
 @app.route('/login', methods = ["GET", "POST"])
 def login():
-    if "auth" in session:
+    if isInstructor(session) or isStudent(session):
          return redirect('/')
     
     if(request.method == "GET"):
@@ -184,6 +187,9 @@ def login():
 
 @app.route('/register', methods = ["GET", "POST"])
 def register():
+    if isInstructor(session) or isStudent(session):
+        return redirect('/')
+    
     if request.method == "GET":
         return render_template("register.html")
     
@@ -212,22 +218,34 @@ def register():
 
 @app.route('/logout')
 def logout():
-    session.pop("auth", default=None)
-    session.pop("name", default=None)
+    if "auth" in session:
+        session.pop("auth", default=None)
+    if "name" in session:
+        session.pop("name", default=None)
     return redirect('/')
+
+
+@app.route('/grades')
+def view():
+    lst_tests = Test.query.all()
+    lst_grades = None
+    if(isInstructor(session)):
+        students = Student.query.all()
+        return render_template("modify_assignment.html", lst_tests = lst_tests, grades = True, lst_grades = lst_grades)
+    # grades = Grades.query.filter_by(username = session["username"]).get()
+    return render_template("grades.html", lst_tests = lst_tests, grades = True, lst_grades = lst_grades)
+
 
 @app.route('/grades/<test_id>', methods = ["GET", "POST"])
 def edit_grades(test_id):
 
-    if "auth" not in session or session["auth"] != "instructor":
+    if(not isInstructor(session)):
         return redirect('/')
     
     if(request.method == "GET"):
         lst_student_grades = Grades.query.filter_by(test_id = test_id).all()
         lst_student = Student.query.all()
-
-        
-        return render_template('update_grades.html', lst_student_grades = lst_student_grades, lst_student = lst_student)
+        return render_template('update_grades.html', lst_student_grades = lst_student_grades, lst_student = lst_student, test_id = test_id)
 
     if(request.method == "POST"):
         lst_students = Student.query.all()
@@ -241,6 +259,17 @@ def edit_grades(test_id):
                 db.session.add(new_grade)
 
         db.session.commit()
+
+@app.route('/grades/<test_id>/delete')
+def delete_test(test_id):
+    if(not isInstructor(session)):
+       return redirect('/')
+    test = Test.query.filter_by(test_id = test_id).first()
+    db.session.delete(test)
+    db.session.commit()
+
+    flash("Delete succeed", "Success")
+    return redirect("/grades")
 
 if __name__ == "__main__":
     app.run(debug=True)
