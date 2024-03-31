@@ -114,6 +114,7 @@ input::-webkit-inner-spin-button {
     padding-bottom: 10px;
 }
 
-.add-button-container img {
-    margin-right: 10px;
+.add-button:hover {
+    background-color: #006F93;
+    text-decoration: underline;
 }
