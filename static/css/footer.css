@@ -9,7 +9,7 @@
         font-family: Arial, Helvetica, sans-serif;
     }
     .footer-4 {
-        background-image: url("images/toronto-b.png");
+        background-image: url("../images/toronto-b.png");
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center bottom;
