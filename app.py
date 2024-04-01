@@ -168,7 +168,7 @@ def login():
                 if(student):
                     hashed_password = student.password
                     if bcrypt.check_password_hash(hashed_password, input_password):
-                        session["auth"] = "student"
+                        session["auth"] = "Student"
                         session["name"] = student.name
                         return redirect("/")
             else:
@@ -176,7 +176,7 @@ def login():
                 if(instructor):
                     hashed_password = instructor.password
                     if bcrypt.check_password_hash(hashed_password, input_password):
-                        session["auth"] = "instructor"
+                        session["auth"] = "Instructor"
                         session["name"] = instructor.name
                         return redirect("/")
             
