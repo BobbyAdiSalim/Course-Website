@@ -142,14 +142,27 @@ def resources():
         return redirect('/')
     return render_template("resources.html", resources = True)
 
-@app.route("/feedback")
+@app.route("/feedback", methods = ["GET", "POST"])
 def feedback():
-    if not isStudent(session):
+    if not isStudent(session) and not isInstructor(session):
         return redirect('/')
-    return render_template("feedback.html", feedback = True)
+    
+    if request.method == "GET":
+        if isStudent(session):
+            return render_template("feedback.html", feedback = True)
 
+        if isInstructor(session):
+            lst_feedbacks = Feedback.query.all()
+            return render_template("feedback_view.html", feedback = True, lst_feedbacks = lst_feedbacks)
 
+    if request.method == "POST":
+        feedback = Feedback(text = request.form["feedback"])
+        db.session.add(feedback)
+        db.session.commit()
 
+        flash("Feedback submitted", "Success")
+        return redirect('/feedback')
+    
 @app.route('/loginInstructor')
 def login_instructor():
     session["auth"] = "Instructor"

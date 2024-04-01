@@ -6,9 +6,24 @@
 
 {% block content %}
 <main class="feedback">
-                
-
-  <form action="/feedback.html">
+  {% with messages = get_flashed_messages(with_categories = True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class=" alert
+               {% if category == 'Success' %}
+               alert-success
+               {% else %}
+               alert-failed
+               {% endif %} ">
+            
+                <div class="alert-message">{{ message }}</div>
+                <div class="alert-x"><a href="">X</a></div>    
+                </div>
+            {% endfor %}
+    {% endif %}
+    {% endwith %}
+    
+  <form action="/feedback" method = "post">
       <textarea name="feedback" id="text-feedback" cols="30" rows="10"
           placeholder="Type your feedback here. Your feedback will be sent anonymously" style="resize: vertical" required></textarea>
       <button class="submit-btn" type="submit" name="submit">Submit</button>

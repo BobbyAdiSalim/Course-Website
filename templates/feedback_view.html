@@ -1,0 +1,49 @@
+{% extends 'home_template.html' %}
+
+{% block extra_css %}
+  <link href="{{ url_for('static', filename='css/news.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+
+
+{% block content %}
+
+<main class="news">
+
+    {% with messages = get_flashed_messages(with_categories = True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class=" alert
+               {% if category == 'Success' %}
+               alert-success
+               {% else %}
+               alert-failed
+               {% endif %} ">
+            
+                <div class="alert-message">{{ message }}</div>
+                <div class="alert-x"><a href="">X</a></div>    
+                </div>
+            {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+
+    {% for feedbacks in lst_feedbacks %}
+    <div class="box">
+        <div class="title-flex">
+            <div class="flex-2">
+                {{ feedbacks.date_created }}
+            </div>
+        </div>
+        <br>
+        <div class="announcement">
+            <p>
+                {{ feedbacks.text }}
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+  
+
+</main>  
+{% endblock %}
