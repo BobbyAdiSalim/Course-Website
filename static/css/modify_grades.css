@@ -94,35 +94,3 @@
     background-color: #006F93;
     text-decoration: underline;
 }
-
-.alert{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    margin: 10px 0px 10px 0px;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.alert-success{
-    background-color: lightgreen;
-}
-
-.alert-failed{
-    background-color: lightcoral;
-}
-
-.alert-message{
-    flex: 15;
-
-}
-
-.alert-x{
-    right: 0;
-}
-
-.alert-x a{
-    text-decoration: none;
-    color: black;
-}

@@ -1,0 +1,34 @@
+{% extends 'home_template.html' %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tests_add.css') }}" type="text/css">
+{% endblock %}
+
+{% block content %}
+    <main class="add-test"> 
+        <div class="card">
+            <div class="title">
+                Add News
+            </div>
+            <form action="/news/add" method="POST">
+                <div class="input">
+                    <label for="title">Title</label>
+                    <br>
+                    <input type="text" name="title" id="title" placeholder="Ex. Deadline Extended" required>
+                </div>
+
+                <div class="input">
+                    <label for="About">About</label>
+                    <br>
+                    <textarea name="text" id="About" placeholder="Ex. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam natus voluptate sint quia veritatis autem aliquid quisquam esse consectetur ullam.
+                    "></textarea>
+                </div>
+
+                <div class="input">
+                <button class="submit-btn" type="submit"><b>Announce</b></button>
+            </div>
+            </form>
+        </div>
+    </main>
+{% endblock %}
+

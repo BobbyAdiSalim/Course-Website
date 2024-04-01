@@ -4,41 +4,56 @@
   <link href="{{ url_for('static', filename='css/news.css') }}" rel="stylesheet" type="text/css">
 {% endblock %}
 
+
+
 {% block content %}
+
 <main class="news">
-  <div class="box">
-      <div class="title-flex">
-          <div class="flex-1 title">
-              <b> Midterm Preparation </b>
-          </div>
-          <div class="flex-2">
-              12-09-2023 12:55:30
-          </div>
-         
-      </div>
-      <br>
-      <div class="announcement">
-          <p>
-              We will have our midterm on 15th March 2024. Please be prepared!
-          </p>
-      </div>
-  </div>
-  <div class="box">
-      <div class="title-flex">
-          <div class="flex-1 title">
-              <b> Welcome </b>
-          </div>
-          <div class="flex-2">
-              12-06-2023 19:35:30
-          </div>
-         
-      </div>
-      <br>
-      <div class="announcement">
-          <p>
-              Welcome First Year! Enjoy your first year!
-          </p>
-      </div>
-  </div>
+
+    {% with messages = get_flashed_messages(with_categories = True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class=" alert
+               {% if category == 'Success' %}
+               alert-success
+               {% else %}
+               alert-failed
+               {% endif %} ">
+            
+                <div class="alert-message">{{ message }}</div>
+                <div class="alert-x"><a href="">X</a></div>    
+                </div>
+            {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+
+    {% for news in lst_news %}
+    <div class="box">
+        <div class="title-flex">
+            <div class="flex-1 title">
+                <b> {{ news.title }} </b>
+            </div>
+            <div class="flex-2">
+                {{ news.date_created }}
+            </div>
+           
+        </div>
+        <br>
+        <div class="announcement">
+            <p>
+                {{ news.text }}
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+  
+
+
+
+  {% if session["auth"] == "Instructor" %}
+  <div class="add-button-container"><a href="/news/add"><button class="add-button"><img src="{{url_for('static', filename='images/plus-white.png')}}" height="13px;" alt="add">Add News</button></a></div>
+
+  {% endif %}
 </main>  
 {% endblock %}

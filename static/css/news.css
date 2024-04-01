@@ -1,5 +1,4 @@
 .news .box{
-    width: 100%;
     background-color: #f0f0f0;
     padding: 10px;
     border-radius: 8px;
@@ -33,9 +32,41 @@
 }
 
 .news .flex-2{
-    flex:1;
+    right: 0;
 }
 
 .box{
     margin-bottom: 10px;
+}
+
+
+.add-button {
+    color: #ffffff;
+    background-color: #007FA3;
+    border-radius: 5px;
+    padding: 12px 15px;
+    font-size: 1em;
+    font-weight: bold;
+    border: solid;
+    border-color: #aaaaaa;
+    border-width: thin;
+}
+
+.add-button-container {
+    width: 100%;
+    text-align: right;
+    position: sticky;
+    bottom: 5px;
+    z-index: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.add-button-container img {
+    margin-right: 10px;
+}
+
+.add-button:hover {
+    background-color: #006F93;
+    text-decoration: underline;
 }

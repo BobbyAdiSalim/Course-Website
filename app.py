@@ -47,6 +47,18 @@ class Instructor(db.Model):
     name = db.Column(db.String(250), nullable = False)
     date_created = db.Column(db.Date)
 
+class Announcement(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(250), nullable = False)
+    text = db.Column(db.Text)
+    date_created = db.Column(db.Date, default = datetime.utcnow)
+
+class Feedback(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    text = db.Column(db.Text)
+    date_created = db.Column(db.Date, default = datetime.utcnow)
+
+
 def isInstructor(identity):
     if "auth" in identity and identity["auth"] == 'Instructor':
         return True
@@ -71,7 +83,28 @@ def labs():
 def news():
     if not isInstructor(session) and not isStudent(session):
         return redirect('/')
-    return render_template("news.html", news = True)
+    lst_news = Announcement.query.all()
+    return render_template("news.html", news = True, lst_news = lst_news)
+    
+
+@app.route('/news/add', methods =["GET", "POST"])
+def news_add():
+    if not isInstructor(session):
+        return redirect('/')
+    
+    if request.method == "GET":
+        return render_template("news_add.html", news = True)
+    
+    if request.method == "POST":
+        title = request.form["title"]
+        text = request.form["text"]
+    
+        news = Announcement(title = title, text = text)
+        db.session.add(news)
+        db.session.commit()
+
+        flash("Announcement " + title + " is live now!", "Success")
+        return redirect("/news")
 
 @app.route("/calendar")
 def calendar():
@@ -274,6 +307,7 @@ def edit_grades(test_id):
                 db.session.add(new_grade)
 
         db.session.commit()
+        flash("Successfuly updated student grade", "Success")
         return redirect('/grades/'+str(test_id))
 
 @app.route('/grades/add', methods = ["GET", "POST"])
