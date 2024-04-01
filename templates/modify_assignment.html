@@ -2,6 +2,9 @@
 
 {% block extra_css %}
 <link href="{{ url_for('static', filename='css/modify_grades.css') }}" rel="stylesheet" type="text/css">
+<script src="{{ url_for('static', filename='js/modify_assignment.js')}}"></script>
+
+
 {% endblock %}
 
 {% block content %}
@@ -16,8 +19,8 @@
                alert-failed
                {% endif %} ">
             
-            {{ message }}
-        </div>
+                <div class="alert-message">{{ message }}</div>    
+                </div>
             {% endfor %}
     {% endif %}
     {% endwith %}
@@ -31,7 +34,7 @@
         </div>
         <div class="action-buttons">
             <a href="/grades/{{ test.id }}/edit"><img class="edit-button" src="{{url_for('static', filename='images/edit.png')}}"></a>
-            <a href="/grades/{{ test.id }}/delete"><img class="del-button" src="{{url_for('static', filename='images/trash.png')}}"></a>
+            <a class = "del-a" href="/grades/{{ test.id }}/delete"><img class="del-button" src="{{url_for('static', filename='images/trash.png')}}"></a>
         </div>    
     </div>   
     

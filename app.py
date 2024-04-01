@@ -137,7 +137,8 @@ def addtest():
         db.session.add(test)
         db.session.commit()
 
-        return "Success"
+        flash("Successfully added " + name, "Success")
+        return redirect('/grades')
 
 
 
