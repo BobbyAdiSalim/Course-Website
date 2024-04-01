@@ -39,17 +39,36 @@
     <nav class="nav-card">
       <div class="card">
         <div class="nav-container">
+          <div class ="nav-subtitle"> 
+            <b>Menu</b>
+            <hr>
+          </div>
+          
           <ul class="nav-list">
             <li> <a href="/" {% if home %}
                 style = "font-weight: bold;"
               {% endif %}>Home</a></li>
             {% if "auth" in session %}
-            <li> <a href="/news" {% if news %}
-                style = "font-weight: bold;"
-              {% endif %}>News </a></li>
             <li> <a href="/calendar" {% if calendar %}
                 style = "font-weight: bold;"
               {% endif %}>Calendar</a></li>
+              <li> <a href="https://piazza.com/class/lqy466htv8g5xb" target="_blank">Discussion Board </a></li>
+            <li> <a href="https://markus2.utsc.utoronto.ca/courses/20" target="_blank">MarkUs </a></li>
+          
+            <li> <a href="/team" {% if team %}
+              style = "font-weight: bold;"
+            {% endif %}>Course Team </a></li>
+          <li> <a href="/resources" {% if resources %}
+              style = "font-weight: bold;"
+            {% endif %}>Resources</a></li>
+          </ul>
+
+            <div class ="nav-subtitle"> 
+              <b>Course Materials</b>
+              <hr>
+            </div>
+
+            <ul class ="nav-list">
             <li> <a href="/lectures" {% if lectures %}
                 style = "font-weight: bold;"
               {% endif %}>Lectures </a></li>
@@ -62,19 +81,27 @@
             <li> <a href="/labs" {% if labs %}
                 style = "font-weight: bold;"
               {% endif %}>Labs </a></li>
+            <li> <a href="{{ url_for('static', filename = 'pdf/mock.pdf' ) }}" target="_blank">Syllabus </a></li>
+            </ul>
+            <div class ="nav-subtitle"> 
+              <b>Announcement</b>
+              <hr>
+            </div>
+            <ul class="nav-list">
+            <li> <a href="/news" {% if news %}
+              style = "font-weight: bold;"
+            {% endif %}>News </a></li>
             <li> <a href="/grades" {% if grades %}
                 style = "font-weight: bold;"
               {% endif %}>Grades </a></li>
-            <li> <a href="{{ url_for('static', filename = 'pdf/mock.pdf' ) }}" target="_blank">Syllabus </a></li>
-            <li> <a href="https://piazza.com/class/lqy466htv8g5xb" target="_blank">Discussion Board </a></li>
-            <li> <a href="https://markus2.utsc.utoronto.ca/courses/20" target="_blank">MarkUs </a></li>
-            <li> <a href="/team" {% if team %}
-                style = "font-weight: bold;"
-              {% endif %}>Course Team </a></li>
-            <li> <a href="/resources" {% if resources %}
-                style = "font-weight: bold;"
-              {% endif %}>Resources</a></li>
+            
+              <div class ="nav-subtitle"> 
+                <b>Feedback</b>
+                <hr>
+              </div>
+              </ul>
               
+              <ul class="nav-list">
               <li> <a href="/feedback" {% if feedback %}
                 style = "font-weight: bold;"
               {% endif %}>Anonymous Feedback </a></li>

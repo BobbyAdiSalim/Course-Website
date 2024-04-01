@@ -83,7 +83,7 @@ def labs():
 def news():
     if not isInstructor(session) and not isStudent(session):
         return redirect('/')
-    lst_news = Announcement.query.all()
+    lst_news = Announcement.query.order_by(Announcement.id.desc()).all()
     return render_template("news.html", news = True, lst_news = lst_news)
     
 
@@ -152,7 +152,7 @@ def feedback():
             return render_template("feedback.html", feedback = True)
 
         if isInstructor(session):
-            lst_feedbacks = Feedback.query.all()
+            lst_feedbacks = Feedback.query.order_by(Feedback.id.desc()).all()
             return render_template("feedback_view.html", feedback = True, lst_feedbacks = lst_feedbacks)
 
     if request.method == "POST":
@@ -254,7 +254,7 @@ def view():
     lst_tests = Test.query.all()
     lst_grades = None
     if(isInstructor(session)):
-        students = Student.query.all()
+        students = Student.query.order_by(Student.name.asc()).all()
         return render_template("modify_assignment.html", lst_tests = lst_tests, grades = True, lst_grades = lst_grades)
     # grades = Grades.query.filter_by(username = session["username"]).get()
 
@@ -283,11 +283,11 @@ def edit_grades(test_id):
     
     if(request.method == "GET"):
         lst_student_grades = Grades.query.filter_by(test_id = test_id).all()
-        lst_student = Student.query.all()
+        lst_student = Student.query.order_by(Student.name.asc()).all()
         search = request.args.get('search')
         if search:
-            lst_student = Student.query.filter(Student.name.like(f"%{search}%")).all()
-        
+            lst_student = Student.query.order_by(Student.name.asc()).filter(Student.name.like(f"%{search}%")).all()
+            lst_student.extend(Student.query.order_by(Student.name.asc()).filter(Student.id.like(f"%{search}%")).all())
         if not search:
             search = ''
 

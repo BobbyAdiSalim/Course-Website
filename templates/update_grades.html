@@ -23,10 +23,10 @@
             {% endfor %}
     {% endif %}
     {% endwith %}
-    
+
         <form action="/grades/{{ test_id }}" method="get">
             <div class=student-search>
-                <input type="text" name="search" placeholder="Search for student" value ="{{ search }}">
+                <input type="text" name="search" placeholder="Search for student (by name, or ID)" value ="{{ search }}">
                 <button type="submit">Search</button>
             </div>
         </form>
