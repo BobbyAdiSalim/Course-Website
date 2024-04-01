@@ -5,26 +5,41 @@
 {% endblock %}
 
 {% block content %}
-    <main>
-
+    <main class="add-test"> 
         <div class="card">
+            <div class="title">
+                Add New Assignment/Test
+            </div>
             <form action="/grades/add" method="POST">
-                <label for=""></label>
-                <input type="text" name="name" id="" placeholder="name">
-    
-                <label for=""></label>
-                <textarea name="desc" id="" placeholder="Description"></textarea>
-                
-                <label for="weight"> Weight: </label>
-                <input type="number" name="weight" id="" placeholder="name">
-    
-                <label for=""></label>
-                <input type="date" name="due_date" id="">
-            
-                <button type="submit">Publish Assignment</button>
+                <div class="input">
+                    <label for="name">Name</label>
+                    <br>
+                    <input type="text" name="name" id="name" placeholder="Ex. Assignment1, Midterm 1" required>
+                </div>
+
+                <div class="input">
+                    <label for="description">Description</label>
+                    <br>
+                    <textarea name="desc" id="description" placeholder="Ex. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam natus voluptate sint quia veritatis autem aliquid quisquam esse consectetur ullam.
+                    "></textarea>
+                </div>
+
+                <div class="input">
+                    <label for="weight"> Weight</label>
+                    <br>
+                    <input type="number" name="weight" id="" placeholder="Ex. 8, 10, 25, 100">
+                </div>
+                <div class="input">
+                    <label for="date"> Due date <small>(optional)</small></label>
+                    <br>
+                    <input type="date" name="due_date" id="date">
+                </div>
+
+                <div class="input">
+                <button class="submit-btn" type="submit"><b>Publish</b></button>
+            </div>
             </form>
         </div>
-        
     </main>
 {% endblock %}
 

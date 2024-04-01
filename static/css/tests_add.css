@@ -1,0 +1,67 @@
+:root{
+    --primary_color: #25355A;
+    --secondary_color: #007FA3;
+}
+
+.add-test hr{
+    margin-top: 0px;
+    height: 3px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(50, 127, 163, 0.5);
+}
+
+.add-test textarea{
+    margin-top: 5px;
+    width: 100%;
+    height: 200px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.add-test .title{
+    text-align: center;
+    margin-bottom: 10px;
+    color: var(--primary_color);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.add-test .submit-btn{
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    border: 1px solid;
+    color: white;
+    background-color: var(--secondary_color);
+    height: 40px;
+}
+
+.add-test input[type = 'text'], .add-test input[type ="number"], .add-test input[type ="date"]{
+    margin-top: 5px;
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.add-test .input{
+    padding: 0px 20px 0px 20px;
+    margin: 0px 0px 15px 0px;
+}
+.add-test .submit-btn:hover{
+    background-color: var(--primary_color);
+
+}
+
+.add-test .card{
+    /* box-sizing: border-box; */
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    /* width: 100%; */
+}
