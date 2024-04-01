@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Login Page</title>
 </head>
 <body>
     
@@ -28,12 +28,9 @@
         Welcome to CSCB20 Winter 2024 Course Webpage
     </div>
         <form action="/login" method="post">
-            <div class="instruction">Register a New Student Account</div>
+            <div class="instruction">Login to Your Account</div>
             <br>
-            <div class="minibutton"><img src="{{ url_for('static', filename='images/student-blue.png')}}" class="imgavatar1"><strong>Student</strong></div>
-        <br>
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name">
+            <div class="minibutton"><img src="{{ url_for('static', filename='images/teacher-blue.png')}}" class="imgavatar1"><strong>Instructor</strong></div>
         <br>
         <label for="username">Username</label>
         <input type="text" id="username" name="username">
@@ -41,9 +38,8 @@
         <label for="password">Password</label>
         <input type="text" id="password" name="password">
         <br>
-        <div class ="newstud">Already have an account? <button class="register">Login here</button></div>
         <br>
-        <button class="buttonlogin" type="submit"><strong>Sign Up</strong></button>
+        <button class="buttonlogin" type="submit"><strong>Login</strong></button>
         </form>
     </body>
 </div>

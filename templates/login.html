@@ -1,18 +1,56 @@
-{% extends 'home_template.html' %}
-
-{% block extra_css %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+</head>
+<body>
     
+</body>
+</html>
+<div class ="bgimage">
+ <body>
+{% block extra_css %}
+    <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet" type="text/css">
 {% endblock %}
-
 {% block content %}
-    <main>
-        <form action="/login" method ="post">
-            <input type="text" name ="username" required>
-            <input type="password" name ="password" required>
-            <input type="text" name="status" value="Student" hidden>
-            <button type="submit">Login</button>
+   {% with messages = get_flashed_messages(with_categories = True) %}
+    {% if messages %}
+        <ul class=flashes>
+        {% for category, message in messages %}
+        <div> <strong>{{ category }}</strong> - {{ message }} </div>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
+    <div class="top">
+        Welcome to CSCB20 Winter 2024 Course Webpage
+    </div>
+        <form action="/login" method="post">
+            <div class="instruction">Login to Your Account</div>
+            <br>
+            <div class="twobuttons">
+                <label for="radio_student"> <div class="minibutton" disabled><img  src="{{ url_for('static', filename='images/student-blue.png')}}" class="imgavatar2"> <strong> Student</strong></div>  </label>
+                <input type="radio" name="status" id="radio_student" value ="Student" hidden>
 
-            No have account? <a href="">Create an account</a>
+                <label for="radio_instructor"> <div class="minibutton"><img  src="{{ url_for('static', filename='images/teacher-blue.png')}}" class="imgavatar2"> <strong> Instructor</strong></div>  </label>
+                <input type="radio" name="status" id="radio_instructor" value ="Instructor" hidden>
+
+                
+            <!-- <button class="minibutton"><img src="{{ url_for('static', filename='images/student-blue.png')}}" class="imgavatar1"><strong>Student</strong></button> -->
+            <!-- <button class="minibutton"><img src="{{ url_for('static', filename='images/teacher-blue.png')}}" class="imgavatar2"><strong>Instructor</strong></button> -->
+            </div>
+            <br>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username">
+            <br>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+            <br>
+            <br>
+            <button class="buttonlogin" type="submit"><strong>Login</strong></button>
         </form>
-    </main>
+    </body>
+</div>
 {% endblock %}

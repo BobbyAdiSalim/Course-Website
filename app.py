@@ -115,30 +115,6 @@ def feedback():
         return redirect('/')
     return render_template("feedback.html", feedback = True)
 
-@app.route('/grades/add', methods = ["GET", "POST"])
-def addtest():
-    if not isInstructor(session):
-        return redirect('/')
-    if request.method == 'GET':
-        return render_template("tests_add.html")
-    else:
-        # Do something here
-        name = request.form["name"]
-        desc = request.form["desc"]
-        weight = request.form["weight"]
-        due_date = request.form["due_date"]
-
-        # Convert to SQLite date
-        if(due_date != ""):
-            due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
-        else:
-            due_date = None
-        test = Test(name = name, desc = desc, due_date = due_date, weight = weight)
-        db.session.add(test)
-        db.session.commit()
-
-        return "Success"
-
 
 
 @app.route('/loginInstructor')
@@ -168,16 +144,18 @@ def login():
                 if(student):
                     hashed_password = student.password
                     if bcrypt.check_password_hash(hashed_password, input_password):
-                        session["auth"] = "student"
+                        session["auth"] = "Student"
                         session["name"] = student.name
+                        session["student_id"] = student.id
                         return redirect("/")
             else:
                 instructor = Instructor.query.filter_by(username = input_username).first()
                 if(instructor):
                     hashed_password = instructor.password
                     if bcrypt.check_password_hash(hashed_password, input_password):
-                        session["auth"] = "instructor"
+                        session["auth"] = "Instructor"
                         session["name"] = instructor.name
+                        session["instructor_id"] = instructor.id
                         return redirect("/")
             
             flash("Login failed! Invalid credentials", "Failed")
@@ -233,8 +211,23 @@ def view():
         students = Student.query.all()
         return render_template("modify_assignment.html", lst_tests = lst_tests, grades = True, lst_grades = lst_grades)
     # grades = Grades.query.filter_by(username = session["username"]).get()
-    return render_template("grades.html", lst_tests = lst_tests, grades = True, lst_grades = lst_grades)
 
+    if(isStudent(session)):
+        grades = Grades.query.filter(Grades.student_id == session["student_id"]).all()
+        lst_of_tuple = []
+
+        for test in lst_tests:
+            found = False
+            for grade in grades:
+                if grade.test.id == test.id:
+                    found = True
+                    lst_of_tuple.append((test, str(grade.grade) + '/100'))
+            if not found:
+                lst_of_tuple.append((test, 'Not graded yet'))
+
+        return render_template("grades.html", lst_of_tuple = lst_of_tuple, lst_tests = lst_tests, grades = True, lst_grades = lst_grades)
+
+    return redirect('/')
 
 @app.route('/grades/<test_id>', methods = ["GET", "POST"])
 def edit_grades(test_id):
@@ -245,13 +238,35 @@ def edit_grades(test_id):
     if(request.method == "GET"):
         lst_student_grades = Grades.query.filter_by(test_id = test_id).all()
         lst_student = Student.query.all()
-        return render_template('update_grades.html', lst_student_grades = lst_student_grades, lst_student = lst_student, test_id = test_id)
+        search = request.args.get('search')
+        if search:
+            lst_student = Student.query.filter(Student.name.like(f"%{search}%")).all()
+        
+        if not search:
+            search = ''
+
+        lst_tuple_student_grade = []
+        for student in lst_student:
+            found = False
+            for grade in lst_student_grades:
+                if student.id == grade.student.id:
+                    found = True
+                    lst_tuple_student_grade.append((student, grade.grade))
+                    break
+
+            if not found:
+                lst_tuple_student_grade.append((student, None))
+
+        return render_template('update_grades.html', search = search, lst_tuple_student_grade = lst_tuple_student_grade, test_id = test_id)
 
     if(request.method == "POST"):
         lst_students = Student.query.all()
         for student in lst_students:
-            grade = request.form["student"+str(student.id)+"_grade"]
-            grade_before = Grades.query.filter(Grades.student_id == student.id and Grades.test_id == test_id).first()
+            keyword = "student"+str(student.id)+"_grade"
+            if keyword not in request.form or request.form[keyword] == '': 
+                continue
+            grade = request.form[keyword]
+            grade_before = Grades.query.filter(Grades.student_id == student.id).filter(Grades.test_id == test_id).first()
             if(grade_before):
                 db.session.query(Grades).filter(Grades.student_id == student.id and Grades.test_id == test_id).update({'grade' : grade})
             else:
@@ -260,7 +275,72 @@ def edit_grades(test_id):
 
         db.session.commit()
         return redirect('/grades/'+str(test_id))
+
+@app.route('/grades/add', methods = ["GET", "POST"])
+def addtest():
+    if not isInstructor(session):
+        return redirect('/')
+    if request.method == 'GET':
+        return render_template("tests_add.html")
+    else:
+        # Do something here
+        name = request.form["name"]
+        desc = request.form["desc"]
+        weight = request.form["weight"]
+        due_date = request.form["due_date"]
+
+        # Convert to SQLite date
+        if(due_date != ""):
+            due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
+        else:
+            due_date = None
+        test = Test(name = name, desc = desc, due_date = due_date, weight = weight)
+        db.session.add(test)
+        db.session.commit()
+
+        flash("Successfully added " + name, "Success")
+        return redirect('/grades')
+
+
+@app.route('/grades/<test_id>/edit', methods = ["GET", "POST"])
+def updatetest(test_id):
+    if not isInstructor(session):
+        return redirect('/')
     
+    if request.method == 'GET':
+        test = Test.query.filter_by(id = test_id).first()
+        if(test.due_date):
+            test.due_date = test.due_date.strftime('%Y-%m-%d')
+        else:
+            test.due_date = ''
+        return render_template("tests_edit.html", test = test)
+    else:
+        # Do something here
+        name = request.form["name"]
+        desc = request.form["desc"]
+        weight = request.form["weight"]
+        due_date = request.form["due_date"]
+
+        # Convert to SQLite date
+        if(due_date != ""):
+            due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
+        else:
+            due_date = None
+
+        to_update = {
+            'name': name,
+            'desc': desc,
+            'weight': weight,
+            'due_date': due_date
+        }
+
+        db.session.query(Test).filter(Test.id == test_id).update(to_update)
+        db.session.commit()
+
+        flash("Successfully updated " + name, "Success")
+        return redirect('/grades')
+
+
 @app.route('/grades/<test_id>/delete')
 def delete_test(test_id):
     if(not isInstructor(session)):

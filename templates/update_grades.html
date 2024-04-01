@@ -7,9 +7,9 @@
 
 {% block content %}
     <main>
-        <form action="/grade/{{ test_id }}" method="get">
+        <form action="/grades/{{ test_id }}" method="get">
             <div class=student-search>
-                <input type="text" name="search" placeholder="Search for student">
+                <input type="text" name="search" placeholder="Search for student" value ="{{ search }}">
                 <button type="submit">Search</button>
             </div>
         </form>
@@ -20,23 +20,18 @@
                     <strong class="student-id">Student ID</strong>
                     <strong class="student-grade">Grade</strong>
                 </div>
-                    {% set found = False %}
-                    {% for student in lst_student %}
-                        <div class="student-row">
-                            <span class="student-name">{{ student.name }}</span>
-                            <span class="student-id">{{ student.id }}</span>
-                            {% for grade in lst_student_grades %}
-                                {% if grade.student.id == student.id %}
-                                    {% set found = True %}
-                                        <span class="student-grade"><input type="number" value="{{ grade.grade }}" name="student{{ student.id }}_grade"></span>
-                                {% endif %}
-                            {% endfor %}
-                        {% if found == False %}
-                            <span class="student-grade"><input type="number" value="" name="student{{ student.id }}_grade"></span>
-                        {% endif %}
-                        <!-- if student name ada di lst_student_grades, then tampilin grades nya, if not tampilin empty -->
-                    </div>
-                {% endfor %} 
+                    
+                {% for student, grade in lst_tuple_student_grade %}
+                <div class="student-row">
+                    <span class="student-name">{{ student.name }}</span>
+                    <span class="student-id">{{ student.id }}</span>
+
+                    <span class="student-grade">
+                        <input type="number" value="{{ grade }}" name="student{{ student.id }}_grade">
+                    </span>
+                </div>
+                {% endfor %}
+            
             </div>
             <div class="add-button-container"><button class="add-button" type="submit">Submit Grades</button></div>
         </form>

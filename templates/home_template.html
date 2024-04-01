@@ -74,16 +74,22 @@
             <li> <a href="/resources" {% if resources %}
                 style = "font-weight: bold;"
               {% endif %}>Resources</a></li>
-            <li> <a href="/feedback" {% if feedback %}
+              {% if session["auth"] == "Student" %}
+              <li> <a href="/feedback" {% if feedback %}
                 style = "font-weight: bold;"
               {% endif %}>Anonymous Feedback </a></li>
+              {% endif %}
+            
             {% endif %}
           </ul>
         </div>
       </div>
     </nav>
+
+    
     {% block content %}
     {% endblock %}   
+    
     <footer class="footer">
       <div class="footer-1">
         <div class="footer-heading" style="font-size: 2rem;">CSCB20</div>

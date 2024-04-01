@@ -8,35 +8,35 @@
     <main class="add-test"> 
         <div class="card">
             <div class="title">
-                Add New Assignment/Test
+                Update Assignment/Test
             </div>
-            <form action="/grades/add" method="POST">
+            <form action="/grades/{{ test.id }}/edit" method="POST">
                 <div class="input">
                     <label for="name">Name</label>
                     <br>
-                    <input type="text" name="name" id="name" placeholder="Ex. Assignment1, Midterm 1" required>
+                    <input type="text" name="name" id="name" placeholder="Ex. Assignment1, Midterm 1" value ="{{ test.name }}" required>
                 </div>
 
                 <div class="input">
                     <label for="description">Description</label>
                     <br>
                     <textarea name="desc" id="description" placeholder="Ex. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam natus voluptate sint quia veritatis autem aliquid quisquam esse consectetur ullam.
-                    "></textarea>
+                    ">{{ test.desc }}</textarea>
                 </div>
 
                 <div class="input">
                     <label for="weight"> Weight</label>
                     <br>
-                    <input type="number" name="weight" id="" placeholder="Ex. 8, 10, 25, 100">
+                    <input type="number" name="weight" id="" placeholder="Ex. 8, 10, 25, 100" value = "{{ test.weight }}">
                 </div>
                 <div class="input">
                     <label for="date"> Due date <small>(optional)</small></label>
                     <br>
-                    <input type="date" name="due_date" id="date">
+                    <input type="date" name="due_date" id="date" value ="{{ test.due_date }}">
                 </div>
 
                 <div class="input">
-                <button class="submit-btn" type="submit"><b>Publish</b></button>
+                <button class="submit-btn" type="submit"><b>Update</b></button>
             </div>
             </form>
         </div>
