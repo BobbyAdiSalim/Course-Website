@@ -10,13 +10,13 @@
 
 <main class="grades-main">
 
-    {% for test in lst_tests %}
+    {% for test, grade in lst_of_tuple %}
     <div class="assignment-item">
         <div class="assignment-container assignment-header">
             <div class="assignment assignment-title more">{{ test.name }}</div>
             <div class="header-section header-section1">
                 <span class="assignment due-date">Due date: {{ test.due_date }}</span>
-                <span class="assignment assignment-grade">Grade: 90/110</span>
+                <span class="assignment assignment-grade">Grade: {{ grade }}</span>
                 <span class="assignment assignment-weight">Weight: {{ test.weight }}%</span>
             </div>
             <div class="header-section more">More</div>

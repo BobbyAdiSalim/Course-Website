@@ -8,7 +8,7 @@ $(document).ready(function() {
         }
     });
 
-    $('.alert-x').on('click', function(event)){
+    $('.alert-x').on('click', function(event){
         $('.alert').hide();
-    }
+    })
 });

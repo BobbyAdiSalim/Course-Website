@@ -7,9 +7,9 @@
 
 {% block content %}
     <main>
-        <form action="/grade/{{ test_id }}" method="get">
+        <form action="/grades/{{ test_id }}" method="get">
             <div class=student-search>
-                <input type="text" name="search" placeholder="Search for student">
+                <input type="text" name="search" placeholder="Search for student" value ="{{ search }}">
                 <button type="submit">Search</button>
             </div>
         </form>
@@ -21,21 +21,16 @@
                     <strong class="student-grade">Grade</strong>
                 </div>
                     
-                {% for student in lst_student %}
-                {% set value = '' %}
+                {% for student, grade in lst_tuple_student_grade %}
                 <div class="student-row">
                     <span class="student-name">{{ student.name }}</span>
                     <span class="student-id">{{ student.id }}</span>
-                    {% for grade in lst_student_grades %}
-                        {% if grade.student.id == student.id %}
-                            {% set value = grade.grade %}
-                        {% endif %}
-                    {% endfor %}
+
                     <span class="student-grade">
-                        <input type="number" value="{{ value }}" name="student{{ student.id }}_grade">
+                        <input type="number" value="{{ grade }}" name="student{{ student.id }}_grade">
                     </span>
                 </div>
-            {% endfor %}
+                {% endfor %}
             
             </div>
             <div class="add-button-container"><button class="add-button" type="submit">Submit Grades</button></div>
