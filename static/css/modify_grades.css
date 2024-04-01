@@ -114,6 +114,15 @@
 }
 
 .alert-message{
-    flex: 10;
+    flex: 15;
 
+}
+
+.alert-x{
+    right: 0;
+}
+
+.alert-x a{
+    text-decoration: none;
+    color: black;
 }

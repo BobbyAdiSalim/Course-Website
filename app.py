@@ -115,31 +115,6 @@ def feedback():
         return redirect('/')
     return render_template("feedback.html", feedback = True)
 
-@app.route('/grades/add', methods = ["GET", "POST"])
-def addtest():
-    if not isInstructor(session):
-        return redirect('/')
-    if request.method == 'GET':
-        return render_template("tests_add.html")
-    else:
-        # Do something here
-        name = request.form["name"]
-        desc = request.form["desc"]
-        weight = request.form["weight"]
-        due_date = request.form["due_date"]
-
-        # Convert to SQLite date
-        if(due_date != ""):
-            due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
-        else:
-            due_date = None
-        test = Test(name = name, desc = desc, due_date = due_date, weight = weight)
-        db.session.add(test)
-        db.session.commit()
-
-        flash("Successfully added " + name, "Success")
-        return redirect('/grades')
-
 
 
 @app.route('/loginInstructor')
@@ -261,7 +236,72 @@ def edit_grades(test_id):
 
         db.session.commit()
         return redirect('/grades/'+str(test_id))
+
+@app.route('/grades/add', methods = ["GET", "POST"])
+def addtest():
+    if not isInstructor(session):
+        return redirect('/')
+    if request.method == 'GET':
+        return render_template("tests_add.html")
+    else:
+        # Do something here
+        name = request.form["name"]
+        desc = request.form["desc"]
+        weight = request.form["weight"]
+        due_date = request.form["due_date"]
+
+        # Convert to SQLite date
+        if(due_date != ""):
+            due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
+        else:
+            due_date = None
+        test = Test(name = name, desc = desc, due_date = due_date, weight = weight)
+        db.session.add(test)
+        db.session.commit()
+
+        flash("Successfully added " + name, "Success")
+        return redirect('/grades')
+
+
+@app.route('/grades/<test_id>/edit', methods = ["GET", "POST"])
+def updatetest(test_id):
+    if not isInstructor(session):
+        return redirect('/')
     
+    if request.method == 'GET':
+        test = Test.query.filter_by(id = test_id).first()
+        if(test.due_date):
+            test.due_date = test.due_date.strftime('%Y-%m-%d')
+        else:
+            test.due_date = ''
+        return render_template("tests_edit.html", test = test)
+    else:
+        # Do something here
+        name = request.form["name"]
+        desc = request.form["desc"]
+        weight = request.form["weight"]
+        due_date = request.form["due_date"]
+
+        # Convert to SQLite date
+        if(due_date != ""):
+            due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
+        else:
+            due_date = None
+
+        to_update = {
+            'name': name,
+            'desc': desc,
+            'weight': weight,
+            'due_date': due_date
+        }
+
+        db.session.query(Test).filter(Test.id == test_id).update(to_update)
+        db.session.commit()
+
+        flash("Successfully updated " + name, "Success")
+        return redirect('/grades')
+
+
 @app.route('/grades/<test_id>/delete')
 def delete_test(test_id):
     if(not isInstructor(session)):

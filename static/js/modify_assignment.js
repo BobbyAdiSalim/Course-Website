@@ -7,4 +7,8 @@ $(document).ready(function() {
             event.preventDefault();
         }
     });
+
+    $('.alert-x').on('click', function(event)){
+        $('.alert').hide();
+    }
 });

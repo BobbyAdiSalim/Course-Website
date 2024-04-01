@@ -74,9 +74,12 @@
             <li> <a href="/resources" {% if resources %}
                 style = "font-weight: bold;"
               {% endif %}>Resources</a></li>
-            <li> <a href="/feedback" {% if feedback %}
+              {% if session["auth"] == "Student" %}
+              <li> <a href="/feedback" {% if feedback %}
                 style = "font-weight: bold;"
               {% endif %}>Anonymous Feedback </a></li>
+              {% endif %}
+            
             {% endif %}
           </ul>
         </div>
