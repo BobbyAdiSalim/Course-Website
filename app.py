@@ -39,6 +39,7 @@ class Grades(db.Model):
     student_id = db.Column(db.Integer, db.ForeignKey('student.id'), nullable = False)
     test_id = db.Column(db.Integer, db.ForeignKey('test.id'), nullable = False)
     grade = db.Column(db.Float, nullable = False)
+    remarks = db.relationship("RemarkRequest", backref ='grade', lazy = True)
 
 class Instructor(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -55,9 +56,19 @@ class Announcement(db.Model):
 
 class Feedback(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    text = db.Column(db.Text)
+    feedback1 = db.Column(db.Text)
+    feedback2 = db.Column(db.Text)
+    feedback3 = db.Column(db.Text)
+    feedback4 = db.Column(db.Text)
+    instructor_id = db.Column(db.Integer, db.ForeignKey('instructor.id'), nullable = False)
     date_created = db.Column(db.Date, default = datetime.utcnow)
 
+class RemarkRequest(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    grade_id = db.Column(db.Integer, db.ForeignKey('grades.id'),nullable =False)
+    desc = db.Column(db.Text)
+    solved = db.Column(db.Integer, default = 0)
+    date_created = db.Column(db.Date, default = datetime.utcnow)
 
 def isInstructor(identity):
     if "auth" in identity and identity["auth"] == 'Instructor':
@@ -149,14 +160,32 @@ def feedback():
     
     if request.method == "GET":
         if isStudent(session):
-            return render_template("feedback.html", feedback = True)
+            instructors = Instructor.query.all()
+            return render_template("feedback.html", feedback = True, instructors = instructors)
 
         if isInstructor(session):
             lst_feedbacks = Feedback.query.order_by(Feedback.id.desc()).all()
             return render_template("feedback_view.html", feedback = True, lst_feedbacks = lst_feedbacks)
 
     if request.method == "POST":
-        feedback = Feedback(text = request.form["feedback"])
+        instructor_id = request.form["instructor_id"]
+        feedback1 = request.form["feedback-1"]
+        feedback2 = request.form["feedback-2"]
+        feedback3 = request.form["feedback-3"]
+        feedback4 = request.form["feedback-4"]
+
+        if feedback1 == '' or feedback2 == '' or feedback3 == '' or feedback4 == '':
+            flash("Please fill in all the box", "Failed")
+            return redirect('/feedback')
+
+        feedback = Feedback(
+            instructor_id = instructor_id,
+            feedback1 = feedback1,
+            feedback2 = feedback2, 
+            feedback3 = feedback3, 
+            feedback4 = feedback4
+            )
+        
         db.session.add(feedback)
         db.session.commit()
 
