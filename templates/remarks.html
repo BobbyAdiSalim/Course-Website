@@ -21,13 +21,13 @@
       
         {% for remark in lst_remarks %}
         <div class="row">
-            <div class="column-5">{{ remark.student_id }}</div>
+            <div class="column-5">{{ remark.grade.student.id }}</div>
             <div class="column">{{ remark.grade.student.name }}</div>
-            <div class="column"><a href="mock.pdf">{{ remark.grade.test.name }}</a></div>
-            <div class="column-desc"><a href="mock.pdf">{{ remark.desc }}</a></div>
+            <div class="column">{{ remark.grade.test.name }}</div>
+            <div class="column-desc">{{ remark.desc }}</div>
             <div class="column">
-                <div><a href="">Mark as Resolved</a></div>
-                <div><a href="">Change Grade</a></div>
+                <div><a href="/grades/remarks/{{ remark.id }}/resolve">Mark as Resolved</a></div>
+                <div><a href="/grades/{{ remark.grade.test.id }}?id={{ remark.grade.id }}">Change Grade</a></div>
             </div>
         </div>
         {% endfor %}

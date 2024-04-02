@@ -91,13 +91,24 @@
             <li> <a href="/news" {% if news %}
               style = "font-weight: bold;"
             {% endif %}>News </a></li>
+
+            {% if "auth" in session and session["auth"] != "Instructor" %}
             <li> <a href="/grades" {% if grades %}
                 style = "font-weight: bold;"
               {% endif %}>Grades </a></li>
+              {% endif %}
 
+              {% if "auth" in session and session["auth"] == 'Instructor' %}
+              <li> <a href="/grades" {% if grades %}
+                style = "font-weight: bold;"
+              {% endif %}>Grades and Assignment/Test</a></li>
+              {% endif %}
+              
               <li> <a href="/grades/remarks" {% if remarks %}
                 style = "font-weight: bold;"
               {% endif %}>Remark Request </a></li>
+              
+              
               
 
 

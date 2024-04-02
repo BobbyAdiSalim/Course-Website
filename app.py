@@ -134,13 +134,18 @@ def lectures():
 def assignments():
     if not isInstructor(session) and not isStudent(session):
         return redirect('/')
-    return render_template("assignments.html", assignments = True)
+    
+    lst_assignments = Test.query.filter(Test.type == 'Assignment').all()
+    return render_template("assignments.html", assignments = true, lst_assignments = lst_assignments)
 
 @app.route("/tests")
 def tests():
     if not isInstructor(session) and not isStudent(session):
         return redirect('/')
-    return render_template("tests.html", tests = True)
+    
+    lst_tests = Test.query.filter(Test.type == "Test").all()
+
+    return render_template("tests.html", tests = True, lst_tests = lst_tests)
 
 @app.route("/team")
 def team():
@@ -309,12 +314,19 @@ def edit_grades(test_id):
         return redirect('/')
     
     if(request.method == "GET"):
-        lst_student_grades = Grades.query.filter_by(test_id = test_id).all()
-        lst_student = Student.query.order_by(Student.name.asc()).all()
+        grade_id = request.args.get("id")
         search = request.args.get('search')
-        if search:
-            lst_student = Student.query.order_by(Student.name.asc()).filter(Student.name.like(f"%{search}%")).all()
-            lst_student.extend(Student.query.order_by(Student.name.asc()).filter(Student.id.like(f"%{search}%")).all())
+        if(grade_id):
+            lst_student_grades = [Grades.query.filter_by(id = grade_id).first()]
+            lst_student = [lst_student_grades[0].student]
+        else:
+            lst_student_grades = Grades.query.filter_by(test_id = test_id).all()
+            lst_student = Student.query.order_by(Student.name.asc()).all()
+
+            if search:
+                lst_student = Student.query.order_by(Student.name.asc()).filter(Student.name.like(f"%{search}%")).all()
+                lst_student.extend(Student.query.order_by(Student.name.asc()).filter(Student.id.like(f"%{search}%")).all())
+            
         if not search:
             search = ''
 
@@ -430,6 +442,22 @@ def delete_test(test_id):
 
     flash("Delete succeed", "Success")
     return redirect("/grades")
+
+
+@app.route('/grades/remarks/<remark_id>/resolve')
+def resolve_req(remark_id):
+    if not isInstructor(session):
+        return redirect('/')
+    
+    db.session.query(RemarkRequest).filter(RemarkRequest.id == remark_id).update(
+        {
+            'solved' : 1
+        }
+    )
+
+    db.session.commit()
+    flash("Successfuly updated student grade", "Success")
+    return redirect('/grades/remarks')
 
 @app.route('/grades/remarks', methods = ["GET", "POST"])
 def remark():
