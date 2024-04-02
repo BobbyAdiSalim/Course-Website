@@ -148,8 +148,11 @@ def feedback():
         return redirect('/')
     
     if request.method == "GET":
+
+
         if isStudent(session):
-            return render_template("feedback.html", feedback = True)
+            instructors = Instructor.query.all()
+            return render_template("feedback.html", feedback = True, instructors = instructors)
 
         if isInstructor(session):
             lst_feedbacks = Feedback.query.order_by(Feedback.id.desc()).all()
