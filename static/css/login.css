@@ -50,9 +50,7 @@
     
   }
 
-  input[type="radio"]:checked{
-    visibility:hidden;
-}
+  
 
   input[type="text"],
   input[type="password"],
@@ -173,6 +171,21 @@
     margin-top: 2px;
   }
 
+  .minibutton2 {
+    background-color: #25355A;
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    font-style: oblique;
+    color: #E5E4E2;
+    padding: 15px 26px;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+    font-size: 20px;
+    transition: all .2s ease;
+    font-weight: bolder;
+    font-style: normal;
+  }
+
   .minibutton {
     background-color: #E5E4E2;
     font-family: Geneva, Arial, Helvetica, sans-serif;
@@ -189,6 +202,13 @@
   }
 
   .minibutton:hover {
+    -ms-transform: scale(1.05); /* IE 9 */
+    -webkit-transform: scale(1.05); /* Safari 3-8 */
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+
+  .minibutton2:hover {
     -ms-transform: scale(1.05); /* IE 9 */
     -webkit-transform: scale(1.05); /* Safari 3-8 */
     transform: scale(1.05);
@@ -224,6 +244,41 @@
     font-style: normal;
   }
 
-  .blank {
+  
+  .register {
+    color: #25355A;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: all .2s ease;
+    font-weight: bolder;
+    font-style: normal;
     text-align: center;
+    margin: auto;
+    font-size: 15px;
+    background-color: none;
+  }
+
+  .register:hover {
+    -ms-transform: scale(1.05); /* IE 9 */
+    -webkit-transform: scale(1.05); /* Safari 3-8 */
+    transform: scale(1.05);
+  }
+
+  .newstud {
+    font-style: normal;
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    display: none;
+
+  }
+
+  .newins {
+    font-style: normal;
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    display: none;
+
   }
