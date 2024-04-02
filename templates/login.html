@@ -11,11 +11,21 @@
                 $('.newstud').slideToggle();
                 $('.newins').hide();
                 $('.radio_student_label').removeClass('minibutton').addClass('minibutton2');
+                $('.radio_instructor').removeClass('minibutton2');
+                if ($('.register').data('clicked')){
+                    $('form.login').visible = false;
+                    $('form.register').visible = true;
+                };
             });
             $('#radio_instructor').click(function(){
                 $('.newins').slideToggle();
                 $('.newstud').hide();
-                $('.radio_student_label').removeClass('minibutton').addClass('minibutton2');
+                $('.radio_instructor').removeClass('minibutton').addClass('minibutton2');
+                $('.radio_student_label').removeClass('minibutton2');
+                if ($('.register').data('clicked')){
+                    $('form.login').visible = false;
+                    $('form.register').visible = true;
+                };
             });
         });
     </script>
