@@ -4,9 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+            $('#radio_student').click(function(){
+                $('.newstud').slideToggle();
+                $('.newins').hide();
+                $('.radio_student_label').removeClass('minibutton').addClass('minibutton2');
+                $('.radio_instructor').removeClass('minibutton2');
+                if ($('.register').data('clicked')){
+                    $('form.login').visible = false;
+                    $('form.register').visible = true;
+                };
+            });
+            $('#radio_instructor').click(function(){
+                $('.newins').slideToggle();
+                $('.newstud').hide();
+                $('.radio_instructor').removeClass('minibutton').addClass('minibutton2');
+                $('.radio_student_label').removeClass('minibutton2');
+                if ($('.register').data('clicked')){
+                    $('form.login').visible = false;
+                    $('form.register').visible = true;
+                };
+            });
+        });
+    </script>
 </head>
 <body>
-    
 </body>
 </html>
 <div class ="bgimage">
@@ -38,23 +62,24 @@
             <div class="instruction">Login to Your Account</div>
             <br>
             <div class="twobuttons">
-                <label for="radio_student"> <div class="minibutton" disabled><img  src="{{ url_for('static', filename='images/student-blue.png')}}" class="imgavatar2"> <strong> Student</strong></div>  </label>
-                <input type="radio" name="status" id="radio_student" value ="Student" hidden required>
+            <label class="radio_student_label" for="radio_student"><div class="minibutton"><img src="{{ url_for('static', filename='images/student-blue.png')}}" class="imgavatar1"><strong>Student</strong></div></label>
+            <input type="radio" name="status" id="radio_student" value ="Student" hidden required>
 
-                <label for="radio_instructor"> <div class="minibutton"><img  src="{{ url_for('static', filename='images/teacher-blue.png')}}" class="imgavatar2"> <strong> Instructor</strong></div>  </label>
-                <input type="radio" name="status" id="radio_instructor" value ="Instructor" hidden>
-
+            <label class="radio_instructor" for="radio_instructor"><div class="minibutton"><img src="{{ url_for('static', filename='images/teacher-blue.png')}}" class="imgavatar2"><strong>Instructor</strong></div></label>
+            <input type="radio" name="status" id="radio_instructor" value ="Instructor" hidden>
                 
             <!-- <button class="minibutton"><img src="{{ url_for('static', filename='images/student-blue.png')}}" class="imgavatar1"><strong>Student</strong></button> -->
             <!-- <button class="minibutton"><img src="{{ url_for('static', filename='images/teacher-blue.png')}}" class="imgavatar2"><strong>Instructor</strong></button> -->
             </div>
             <br>
-            <label for="username">Username</label>
+            <label class ="forlabel" for="username">Username</label>
             <input type="text" id="username" name="username">
             <br>
-            <label for="password">Password</label>
+            <label class ="forlabel" for="password">Password</label>
             <input type="password" id="password" name="password">
             <br>
+            <div class ="newstud">Are you a new student? <button class="register">Create new account</button></div>
+            <div class ="newins">Are you a new instructor? <button class="register">Create new account</button></div>
             <br>
             <button class="buttonlogin" type="submit"><strong>Login</strong></button>
         </form>
