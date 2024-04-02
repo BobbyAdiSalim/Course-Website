@@ -89,7 +89,7 @@
   
   input[type="radio"],
   input[type="checkbox"] {
-    margin: 0 4px 8px 0;
+    margin: auto;
   }
   
   select {
@@ -130,7 +130,7 @@
     margin-bottom: 16px;
   }
   
-  label {
+  .forlabel {
     display: block;
     line-height: 24px;
     font-size: 16px;
@@ -138,7 +138,7 @@
     margin-bottom: 4px;
   }
   
-  label.light {
+  .forlabel.light {
     font-weight: 300;
     display: inline;
   }
@@ -150,11 +150,23 @@
 }
 
   .imgavatar1 {
-    width: 50px;
+    width: 48px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 8px;
+    margin-top: 1px;
+    
+
   }
 
   .imgavatar2 {
-    width : 50px;
+    width : 52px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 9px;
+    margin-top: 2px;
   }
 
   .minibutton {
@@ -176,6 +188,7 @@
     -ms-transform: scale(1.05); /* IE 9 */
     -webkit-transform: scale(1.05); /* Safari 3-8 */
     transform: scale(1.05);
+    opacity: 0.8;
   }
 
   button:hover {
@@ -205,4 +218,8 @@
     font-size: 20px;
     font-weight: bold;
     font-style: normal;
+  }
+
+  .blank {
+    text-align: center;
   }
