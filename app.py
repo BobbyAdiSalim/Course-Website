@@ -367,6 +367,7 @@ def edit_grades(test_id):
 def addtest():
     if not isInstructor(session):
         return redirect('/')
+    
     if request.method == 'GET':
         return render_template("tests_add.html")
     else:

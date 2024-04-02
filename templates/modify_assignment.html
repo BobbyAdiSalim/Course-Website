@@ -30,8 +30,8 @@
     <div class="assignment-item">
         <div class="assignment assignment-title"><a href="/grades/{{ test.id }}">{{test.name}}</a></div>
         <div class="header-section">
-            <span class="assignment due-date">Due date: 14 February 2024</span>
-            <span class="assignment assignment-weight">Weight: 8%</span>
+            <span class="assignment due-date">Due date: {{ test.due_date }}</span>
+            <span class="assignment assignment-weight">Weight: {{ test.weight }}%</span>
         </div>
         <div class="action-buttons">
             <a href="/grades/{{ test.id }}/edit"><img class="edit-button" src="{{url_for('static', filename='images/edit.png')}}"></a>
