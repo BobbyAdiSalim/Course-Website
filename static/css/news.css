@@ -70,3 +70,14 @@
     background-color: #006F93;
     text-decoration: underline;
 }
+
+td{
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 5px;
+    border: var(--primary_color) 1px solid ;
+}
+
+td a{
+    text-decoration: none;
+}

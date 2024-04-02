@@ -8,6 +8,7 @@ from flask import (
     flash,
     redirect
     )
+
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
 from flask_bcrypt import Bcrypt
@@ -155,6 +156,7 @@ def resources():
 
 @app.route("/feedback", methods = ["GET", "POST"])
 def feedback():
+
     if not isStudent(session) and not isInstructor(session):
         return redirect('/')
     
@@ -164,8 +166,10 @@ def feedback():
             return render_template("feedback.html", feedback = True, instructors = instructors)
 
         if isInstructor(session):
-            lst_feedbacks = Feedback.query.order_by(Feedback.id.desc()).all()
-            return render_template("feedback_view.html", feedback = True, lst_feedbacks = lst_feedbacks)
+            
+            lst_feedbacks = db.paginate(Feedback.query.order_by(Feedback.id.desc()).filter(Feedback.instructor_id == session["instructor_id"]))
+            lst_pagination = lst_feedbacks.iter_pages()
+            return render_template("feedback_view.html", feedback = True, lst_feedbacks = lst_feedbacks, lst_pagination = lst_pagination)
 
     if request.method == "POST":
         instructor_id = request.form["instructor_id"]
@@ -185,18 +189,13 @@ def feedback():
             feedback3 = feedback3, 
             feedback4 = feedback4
             )
-        
+
         db.session.add(feedback)
         db.session.commit()
 
         flash("Feedback submitted", "Success")
         return redirect('/feedback')
     
-@app.route('/loginInstructor')
-def login_instructor():
-    session["auth"] = "Instructor"
-    session["name"] = "Dummy Ins"
-    return "You are instructor now, love you"
 
 
 @app.route('/login', methods = ["GET", "POST"])
@@ -260,7 +259,6 @@ def register():
             flash("Username already taken", "Invalid Input")
             return redirect('/register')
         
-
         # Done check now create
         new_student = Student(username = input_username, password = input_password, name = input_name)
         db.session.add(new_student)

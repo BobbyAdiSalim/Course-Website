@@ -102,7 +102,12 @@
               </ul>
               
               <ul class="nav-list">
-              <li> <a href="/feedback" {% if feedback %}
+              <li> <a {% if 'auth' in session and session['auth'] == 'Instructor' %}
+                href="/feedback?page=1&per_page=5"
+                {% else %}
+                href="/feedback"
+                {% endif %}  
+                {% if feedback %}
                 style = "font-weight: bold;"
               {% endif %}>Anonymous Feedback </a></li>
               
