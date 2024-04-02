@@ -1,0 +1,45 @@
+{% extends 'home_template.html' %}
+
+{% block extra_css %}
+<link href="{{ url_for('static', filename='css/feedback.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+<main class="feedback">
+  {% with messages = get_flashed_messages(with_categories = True) %}
+  {% if messages %}
+  {% for category, message in messages %}
+  <div class=" alert
+               {% if category == 'Success' %}
+               alert-success
+               {% else %}
+               alert-failed
+               {% endif %} ">
+
+    <div class="alert-message">{{ message }}</div>
+    <div class="alert-x"><a href="">X</a></div>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  <div class="feedback-card">
+    <form action="/grades/remarks" method="post">
+
+      <div class="feedback-box">
+        <label for="grade_id">Choose Assignment/Test to submit the request for:</label>
+        <select name="grade_id" id="grade_id">
+            {% for grade in grades %}
+              <option value="{{ grade.id }}">{{ grade.test.name }} (Grade: {{ grade.grade }})</option>
+            {% endfor %}
+        </select>
+      </div>
+      <div class="feedback-box">
+        <label for="feedback-1">Remark Description</label>
+  
+        <textarea type="text" name="desc" id="feedback-1" placeholder="Ex. Question 1. I wrote the answer right, but i got 0 point" required rows ="5"></textarea>
+      </div>
+      <button class="submit-btn" type="submit" name="submit">Submit</button>
+    </form>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'home_template.html' %}
+
+{% block extra_css %}
+<link href="{{ url_for('static', filename='css/remarks.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+
+
+{% block content %}
+<main class="labs">
+  <div class="table-container">
+      <div class="row">
+          
+          <div class="column-5"><b>Student ID</b></div>
+          <div class="column"><b>Name</b></div>
+          <div class="column"><b>Type</b></div>
+          <div class="column-desc"><b>Remark Description</b> </div>
+          <div class="column"><b>Action</b></div>
+        
+        </div>
+      
+        {% for remark in lst_remarks %}
+        <div class="row">
+            <div class="column-5">{{ remark.student_id }}</div>
+            <div class="column">{{ remark.grade.student.name }}</div>
+            <div class="column"><a href="mock.pdf">{{ remark.grade.test.name }}</a></div>
+            <div class="column-desc"><a href="mock.pdf">{{ remark.desc }}</a></div>
+            <div class="column">
+                <div><a href="">Mark as Resolved</a></div>
+                <div><a href="">Change Grade</a></div>
+            </div>
+        </div>
+        {% endfor %}
+      
+      
+  </div>
+</main>
+{% endblock %}
+
+      

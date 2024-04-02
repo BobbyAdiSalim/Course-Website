@@ -84,3 +84,7 @@ body {
     text-decoration: none;
     color: black;
 }
+
+textarea{
+    resize: vertical;
+}

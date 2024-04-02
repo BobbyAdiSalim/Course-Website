@@ -330,7 +330,7 @@ def edit_grades(test_id):
             if not found:
                 lst_tuple_student_grade.append((student, None))
 
-        return render_template('update_grades.html', search = search, lst_tuple_student_grade = lst_tuple_student_grade, test_id = test_id)
+        return render_template('update_grades.html', search = search, lst_tuple_student_grade = lst_tuple_student_grade, test_id = test_id, grades = True)
 
     if(request.method == "POST"):
         lst_students = Student.query.all()
@@ -431,6 +431,39 @@ def delete_test(test_id):
     flash("Delete succeed", "Success")
     return redirect("/grades")
 
+@app.route('/grades/remarks', methods = ["GET", "POST"])
+def remark():
+
+    if not isInstructor(session) and not isStudent(session):
+        return redirect('/')
+    
+    if request.method == 'GET':
+        if isStudent(session):
+            grades = Grades.query.filter(Grades.student_id == session["student_id"])
+            return render_template("remarks_add.html", grades = grades, remarks = True)
+        
+
+        if isInstructor(session):
+            lst_remarks = RemarkRequest.query.filter(RemarkRequest.solved == 0).order_by(RemarkRequest.id.asc()).all()
+            return render_template("remarks.html", lst_remarks = lst_remarks, remarks = True)
+
+    if request.method == 'POST':
+        if isStudent(session):
+            student_id = session["student_id"]
+            grade_id = request.form["grade_id"]
+            desc = request.form["desc"]
+
+            if not student_id or not grade_id or not desc:
+                flash("Please select and fill in the required form", "Failed")
+                return redirect('/grades/remarks')
+            
+            remark = RemarkRequest(grade_id = grade_id, desc = desc)
+            db.session.add(remark)
+            db.session.commit()
+
+            flash('Successfully request a remark', 'Success')
+            return redirect('/grades/remarks')
+        
 if __name__ == "__main__":
     app.run(debug=True)
 

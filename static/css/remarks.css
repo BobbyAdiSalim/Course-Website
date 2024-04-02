@@ -1,0 +1,42 @@
+.labs .table-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f0f0; /* Grayish background color */
+    padding: 20px;
+    border-radius: 8px;
+    border-color: #aaaaaa;
+    border-style: solid;
+    border-width: thin;
+}
+
+.labs .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc; /* Optional: Add a border between rows */
+}
+
+.labs .column-5{
+    flex: 0.5;
+    padding: 0 10px;
+}
+.labs .column {
+    flex: 1;
+    padding-left: 10px;
+}
+
+.labs .column-desc {
+    flex:3;
+    padding-left: 10px;
+}
+
+.labs .table-head {
+    font-weight: bold;
+    font-size: 1.1em;
+    padding-top: 5px;
+}
+
+.row:last-child {
+    padding-bottom: 0px;
+    border-bottom-style: none;
+}
