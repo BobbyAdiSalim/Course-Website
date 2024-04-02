@@ -11,10 +11,21 @@
                 Add New Assignment/Test
             </div>
             <form action="/grades/add" method="POST">
+
+
                 <div class="input">
                     <label for="name">Name</label>
                     <br>
                     <input type="text" name="name" id="name" placeholder="Ex. Assignment1, Midterm 1" required>
+                </div>
+
+                <div class="input">
+                    <label for="type">Type</label>
+                    <br>
+                    <select name="type" id="type">
+                        <option value="Assignment">Assignment</option>
+                        <option value="Test">Test</option>
+                    </select>
                 </div>
 
                 <div class="input">
@@ -30,9 +41,9 @@
                     <input type="number" name="weight" id="" placeholder="Ex. 8, 10, 25, 100">
                 </div>
                 <div class="input">
-                    <label for="date"> Due date <small>(optional)</small></label>
+                    <label for="date"> Due Date/Date of Test</label>
                     <br>
-                    <input type="date" name="due_date" id="date">
+                    <input type="date" name="due_date" id="date" required>
                 </div>
 
                 <div class="input">

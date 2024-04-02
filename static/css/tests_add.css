@@ -39,7 +39,7 @@
     height: 40px;
 }
 
-.add-test input[type = 'text'], .add-test input[type ="number"], .add-test input[type ="date"]{
+.add-test input[type = 'text'], .add-test input[type ="number"], .add-test input[type ="date"], .add-test select{
     margin-top: 5px;
     width: 100%;
     height: 40px;

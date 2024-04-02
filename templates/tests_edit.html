@@ -18,6 +18,19 @@
                 </div>
 
                 <div class="input">
+                    <label for="type">Type</label>
+                    <br>
+                    <select name="type" id="type">
+                        <option value="Assignment" {% if test.type == 'Assignment' %}
+                            selected
+                        {% endif %}>Assignment</option>
+                        <option value="Test" {% if test.type == 'Test' %}
+                        selected
+                    {% endif %}>Test</option>
+                    </select>
+                </div>
+
+                <div class="input">
                     <label for="description">Description</label>
                     <br>
                     <textarea name="desc" id="description" placeholder="Ex. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam natus voluptate sint quia veritatis autem aliquid quisquam esse consectetur ullam.

@@ -32,6 +32,7 @@ class Test(db.Model):
     name = db.Column(db.String(250), nullable = False)
     desc = db.Column(db.Text)
     weight = db.Column(db.Integer, nullable = False)
+    type = db.Column(db.String(50), nullable = False)
     due_date = db.Column(db.Date)
     grades = db.relationship("Grades", backref = 'test', lazy = True)
 
@@ -136,7 +137,7 @@ def assignments():
         return redirect('/')
     
     lst_assignments = Test.query.filter(Test.type == 'Assignment').all()
-    return render_template("assignments.html", assignments = true, lst_assignments = lst_assignments)
+    return render_template("assignments.html", assignments = True, lst_assignments = lst_assignments)
 
 @app.route("/tests")
 def tests():
@@ -373,6 +374,7 @@ def addtest():
         name = request.form["name"]
         desc = request.form["desc"]
         weight = request.form["weight"]
+        type = request.form["type"]
         due_date = request.form["due_date"]
 
         # Convert to SQLite date
@@ -380,7 +382,7 @@ def addtest():
             due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
         else:
             due_date = None
-        test = Test(name = name, desc = desc, due_date = due_date, weight = weight)
+        test = Test(name = name, desc = desc, due_date = due_date, weight = weight, type = type)
         db.session.add(test)
         db.session.commit()
 
@@ -406,6 +408,7 @@ def updatetest(test_id):
         desc = request.form["desc"]
         weight = request.form["weight"]
         due_date = request.form["due_date"]
+        type = request.form["type"]
 
         # Convert to SQLite date
         if(due_date != ""):
@@ -417,7 +420,8 @@ def updatetest(test_id):
             'name': name,
             'desc': desc,
             'weight': weight,
-            'due_date': due_date
+            'due_date': due_date,
+            'type': type
         }
 
         db.session.query(Test).filter(Test.id == test_id).update(to_update)
