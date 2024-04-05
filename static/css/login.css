@@ -160,6 +160,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-content: center;
     justify-content: center;
     justify-items: center;
   }
@@ -189,6 +190,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-content: center;
     justify-content: center;
     justify-items: center;
   }
@@ -326,7 +328,7 @@
   color: #F0F0F0;;
   font-family: Geneva, Arial, Helvetica, sans-serif;
   font-style: oblique;
-  padding: 15px 26px;
+  padding: 15px 0;
   border: none;
   cursor: pointer;
   width: 30%;
@@ -335,4 +337,10 @@
   font-weight: bolder;
   font-style: normal;
   text-align: justify;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
 }
