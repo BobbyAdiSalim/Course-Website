@@ -58,6 +58,7 @@ $(document).ready(function(){
             $('.minibutton1_student').css("color","#25355A");
             $('.minibutton1_instructor').css("background-color","#E5E4E2");
             $('.minibutton1_instructor').css("color","#25355A");
+            $('#radio_student').click();
         });
 
     });
