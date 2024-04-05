@@ -21,6 +21,8 @@ $(document).ready(function(){
             $('.minibutton1_student').css("color","#E5E4E2");
             $('.minibutton1_instructor').css("background-color","#E5E4E2");
             $('.minibutton1_instructor').css("color","#25355A");
+            $(".imgavatar1").attr("src","/static/images/student-white.png");
+            $(".imgavatar2").attr("src","/static/images/teacher-blue.png");
         });
 
         $('#radio_instructor').click(function(){
@@ -32,6 +34,8 @@ $(document).ready(function(){
             $('.minibutton1_instructor').css("color","#E5E4E2");
             $('.minibutton1_student').css("background-color","#E5E4E2");
             $('.minibutton1_student').css("color","#25355A");
+            $(".imgavatar1").attr("src","/static/images/student-blue.png");
+            $(".imgavatar2").attr("src","/static/images/teacher-white.png");
         });
 
         $('.click_register_student').click(function(){

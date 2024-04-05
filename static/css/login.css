@@ -1,7 +1,6 @@
   .container{
-    background-color: hsl(0, 33%, 99%);
-    color: #25355A;
-    margin: 0 auto;
+    width: 100%;
+    margin: auto;
   }
   
   body{
@@ -10,6 +9,17 @@
     color: #333;
     background-color: #f8f8f9;
     background-image: url("../images/building.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+
+  html, body {
+    min-height: 100vh;
   }
  
   *, *:before, *:after {
@@ -20,13 +30,13 @@
    
   form {
     max-width: 480px;
+    width: 80%;
     margin: 50px auto;
     padding: 16px;
     border: 3px solid #25355A;
     position: relative;
     background-color: #F8F8F8;
     opacity: 0.9;
-    
   }
 
   
@@ -56,6 +66,7 @@
     box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
     margin-bottom: 16px;
     transition: all .2s ease;
+    border-radius: 4px;
   }
   
   input::placeholder {
@@ -137,14 +148,20 @@
     font-family: Geneva, Arial, Helvetica, sans-serif;
     font-style: oblique;
     color: #25355A;
-    padding: 15px 26px;
+    padding: 15px 0;
     border: none;
     cursor: pointer;
     width: 30%;
+    min-width: fit-content;
     font-size: 20px;
     transition: all .2s ease;
     font-weight: bolder;
     font-style: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
   }
 
   .minibutton1_student:hover {
@@ -159,15 +176,21 @@
     font-family: Geneva, Arial, Helvetica, sans-serif;
     font-style: oblique;
     color: #25355A;
-    padding: 15px 26px;
+    padding: 15px 0;
     border: none;
     cursor: pointer;
     width: 30%;
+    min-width: fit-content;
     font-size: 20px;
     transition: all .2s ease;
     font-weight: bolder;
     font-style: normal;
     text-align: justify;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
   }
 
   .minibutton1_instructor:hover {
@@ -186,7 +209,6 @@
   .twobuttons {
     display:flex;
     justify-content:space-evenly;
-
   }
 
   .top{
@@ -291,15 +313,12 @@
 
   }
 
-.text {
-  margin-left: -9px;
-}
 
 .choose_login_visible {
   font-style: normal;
   width: 100%;
   text-align: center;
-    ont-size: 15px;
+  font-size: 15px;
 }
 
 .minibutton_still {
