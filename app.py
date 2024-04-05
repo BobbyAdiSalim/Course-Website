@@ -217,7 +217,7 @@ def login():
     if(request.method == "POST"):
         if('username' in request.form) and ('password' in request.form):
 
-            input_username = request.form["username"]
+            input_username = request.form["username"].lower()
             input_password = request.form["password"]
             input_status = request.form["status"]
 
@@ -253,7 +253,7 @@ def register():
     if request.method == "POST":
         lst_usernames = Student.query.with_entities(Student.username).all()
 
-        input_username = request.form["username"]
+        input_username = request.form["username"].lower()
         input_password = request.form["password"]
         input_name = request.form["name"]
 
@@ -291,7 +291,7 @@ def registerIns():
     if request.method == "POST":
         lst_usernames = Instructor.query.with_entities(Instructor.username).all()
 
-        input_username = request.form["username"]
+        input_username = request.form["username"].lower()
         input_password = request.form["password"]
         input_name = request.form["name"]
 
