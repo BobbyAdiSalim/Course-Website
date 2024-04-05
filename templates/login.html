@@ -1,165 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet" type="text/css">  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script>
-    $(document).ready(function(){
-        $('.register_student').hide();
-        $('.register_instructor').hide();
-            $('#radio_student').click(function(){
-                $('.newstud').slideToggle();
-                $('.newins').hide();
-                $('minibutton').hide();
-                $('.minibutton1_student').css("background-color","#25355A");
-                $('.minibutton1_student').css("color","#E5E4E2");
-                $('.minibutton1_instructor').css("background-color","#E5E4E2");
-                $('.minibutton1_instructor').css("color","#25355A");
-            });
-            $('#radio_instructor').click(function(){
-                $('.newins').slideToggle();
-                $('.newstud').hide();
-                $('.minibutton1_instructor').css("background-color","#25355A");
-                $('.minibutton1_instructor').css("color","#E5E4E2");
-                $('.minibutton1_student').css("background-color","#E5E4E2");
-                $('.minibutton1_student').css("color","#25355A");
-            });
+    <script src="{{ url_for('static', filename='js/login.js')}}"></script>
 
-            $('.click_register_student').click(function(){
-                $('.register_student').show();
-                $('.login_new').hide();
-                $('.register_instructor').hide();
-            });
-
-            $('.click_register_instructor').click(function(){
-                $('.register_instructor').show();
-                $('.register_student').hide();
-                $('.login_new').hide();
-            });
-
-            $('.choose_login').click(function(){
-                $('.login_new').show();
-                $('.register_student').hide();
-                $('.register_instructor').hide();
-                $('.minibutton1_student').css("background-color","#E5E4E2");
-                $('.minibutton1_student').css("color","#25355A");
-                $('.minibutton1_instructor').css("background-color","#E5E4E2");
-                $('.minibutton1_instructor').css("color","#25355A");
-            });
-
-        });
-    </script>
 </head>
+
 <body>
 </body>
+
 </html>
-<div class ="bgimage">
- <body>
-{% block extra_css %}
-    <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet" type="text/css">
-{% endblock %}
-{% block content %}
-{% with messages = get_flashed_messages(with_categories = True) %}
-{% if messages %}
-    {% for category, message in messages %}
-        <div class=" alert
-       {% if category == 'Success' %}
-       alert-success
-       {% else %}
-       alert-failed
-       {% endif %} ">
-    
-        <div class="alert-message">{{ message }}</div>
-        <div class="alert-x"><a href="">X</a></div>    
+<div class="bgimage">
+
+    <body>
+        {% block extra_css %}
+        <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet" type="text/css">
+        {% endblock %}
+        {% block content %}
+
+        <div class="top">
+            Welcome to CSCB20 Winter 2024 Course Webpage
         </div>
-    {% endfor %}
-{% endif %}
-{% endwith %}
-    <div class="top">
-        Welcome to CSCB20 Winter 2024 Course Webpage
-    </div>
-    <div class ="login_new">
-        <form action="/login" method="post">
-            <div class="instruction">Login to Your Account</div>
-            <br>
-            <div class="twobuttons">
-            <div class="minibutton1_student"><label class="radio_student_label" for="radio_student"><img src="{{ url_for('static', filename='images/student-blue.png')}}" class="imgavatar1"><strong>Student</strong></label></div>
-            <input type="radio" name="status" id="radio_student" value ="Student" hidden required>
+        <div class="login_new">
 
-            <div class="minibutton1_instructor"><label class="radio_instructor" for="radio_instructor"><img src="{{ url_for('static', filename='images/teacher-blue.png')}}" class="imgavatar2"><strong><div class="text">Instructor</div></strong></label></div>
-            <input type="radio" name="status" id="radio_instructor" value ="Instructor" hidden>
-                
-            <!-- <button class="minibutton"><img src="{{ url_for('static', filename='images/student-blue.png')}}" class="imgavatar1"><strong>Student</strong></button> -->
-            <!-- <button class="minibutton"><img src="{{ url_for('static', filename='images/teacher-blue.png')}}" class="imgavatar2"><strong>Instructor</strong></button> -->
-            </div>
-            <br>
-            <label class ="forlabel" for="username">Username</label>
-            <input type="text" id="username" name="username">
-            <br>
-            <label class ="forlabel" for="password">Password</label>
-            <input type="password" id="password" name="password">
-            <br>
-            <div class ="newstud">Are you a new student? <label class="click_register_student">Create new account</label></div>
-            <input type="radio" name="click_register_studentt" id="click_register_student" value ="Student" hidden required>
+            <form action="/login" method="post">
+                {% with messages = get_flashed_messages(with_categories = True) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class=" alert
+               {% if category == 'Success' %}
+               alert-success
+               {% else %}
+               alert-failed
+               {% endif %} ">
 
-            <div class ="newins">Are you a new instructor? <label class="click_register_instructor">Create new account</label></div>
-            <input type="radio" name="click_register_instructor" id="click_register_instructor" value ="Student" hidden required>
+                    <div class="alert-message">{{ message }}</div>
+                    <div class="alert-x"><a href="">X</a></div>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <div class="instruction">Login to Your Account</div>
+                <br>
+                <div class="twobuttons">
+                    <label class="minibutton1_student" for="radio_student">
+                        <div class="radio_student_label "><img
+                                src="{{ url_for('static', filename='images/student-blue.png')}}"
+                                class="imgavatar1"><strong>Student</strong></div>
+                    </label>
+                    <input type="radio" name="status" id="radio_student" value="Student" required checked>
 
-            <br>
-            <button class="buttonlogin" type="submit"><strong>Login</strong></button>
-        </form>
-    </div>
+                    <label class="minibutton1_instructor" for="radio_instructor">
+                        <div class="radio_instructor"><img
+                                src="{{ url_for('static', filename='images/teacher-blue.png')}}"
+                                class="imgavatar2"><strong>
+                                <div class="text">Instructor</div>
+                            </strong></div>
+                    </label>
+                    <input type="radio" name="status" id="radio_instructor" value="Instructor">
 
-    <div class="register_student">
-        <form action="/login" method="post">
-            <div class="instruction">Register a New Student Account</div>
-            <br>
-            <div class="twobuttons">
-            <div class="minibutton_still"><img src="{{ url_for('static', filename='images/student-blue.png')}}" class="imgavatar1"><strong>Student</strong></div>
-            </div>
-            <br>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name">
-            <br>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username">
-            <br>
-            <label for="password">Password</label>
-            <input type="text" id="password" name="password">
-            <br>
-            <div class ="choose_login_visible">Already have an account? <label class="choose_login">Log in</label></div>
-            <input type="radio" name="choose_login" id="choose_login" value ="Login" hidden required>
-            <br>
-            <button class="buttonlogin" type="submit"><strong>Sign Up</strong></button>
-        </form>
-    </div>
+                    <!-- <button class="minibutton"><img src="{{ url_for('static', filename='images/student-blue.png')}}" class="imgavatar1"><strong>Student</strong></button> -->
+                    <!-- <button class="minibutton"><img src="{{ url_for('static', filename='images/teacher-blue.png')}}" class="imgavatar2"><strong>Instructor</strong></button> -->
+                </div>
+                <br>
+                <label class="forlabel" for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                <br>
+                <label class="forlabel" for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <div class="newstud">Are you a new student? <label class="click_register_student">Create new
+                        account</label></div>
+                <!-- <input type="radio" name="click_register_studentt" id="click_register_student" value ="Student"  required> -->
 
-    <div class="register_instructor">
-        <form action="/login" method="post">
-            <div class="instruction">Register a New Instructor Account</div>
-            <br>
-            <div class="twobuttons">
-            <div class="minibutton_still"><img src="{{ url_for('static', filename='images/teacher-blue.png')}}" class="imgavatar1"><div class="text"><strong>Instructor</strong></div></div>
-            </div>
-            <br>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name">
-            <br>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username">
-            <br>
-            <label for="password">Password</label>
-            <input type="text" id="password" name="password">
-            <br>
-            <div class ="choose_login_visible">Already have an account? <label class="choose_login">Log in</label></div>
-            <input type="radio" name="choose_login" id="choose_login" value ="Login" hidden required>
-            <br>
-            <button class="buttonlogin" type="submit"><strong>Sign Up</strong></button>
-        </form>
-        
-    </div>
+                <div class="newins">Are you a new instructor? <label class="click_register_instructor">Create new
+                        account</label></div>
+                <!-- <input type="radio" name="click_register_studentt" id="click_register_instructor" value ="Student" > -->
+
+                <br>
+                <button class="buttonlogin" type="submit"><strong>Login</strong></button>
+            </form>
+        </div>
+
+        <div class="register_student">
+            <form action="/registerStudent" method="post">
+                <div class="instruction">Register a New Student Account</div>
+                <br>
+                <div class="twobuttons">
+                    <div class="minibutton_still"><img src="{{ url_for('static', filename='images/student-blue.png')}}"
+                            class="imgavatar1"><strong>Student</strong></div>
+                </div>
+                <br>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                <br>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                <br>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <div class="choose_login_visible">Already have an account? <label class="choose_login">Log in</label>
+                </div>
+                <!-- <input type="radio" name="choose_login" id="choose_login" value ="Login" hidden required> -->
+                <br>
+                <button class="buttonlogin" type="submit"><strong>Sign Up</strong></button>
+            </form>
+        </div>
+
+        <div class="register_instructor">
+            <form action="/registerInstructor" method="post">
+                <div class="instruction">Register a New Instructor Account</div>
+                <br>
+                <div class="twobuttons">
+                    <div class="minibutton_still"><img src="{{ url_for('static', filename='images/teacher-blue.png')}}"
+                            class="imgavatar1">
+                        <div class="text"><strong>Instructor</strong></div>
+                    </div>
+                </div>
+                <br>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                <br>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                <br>
+                <label for="password">Password</label>
+                <input type="text" id="password" name="password" required>
+                <br>
+                <div class="choose_login_visible">Already have an account? <label class="choose_login">Log in</label>
+                </div>
+                <!-- <input type="radio" name="choose_login" id="choose_login" value ="Login" hidden required> -->
+                <br>
+                <button class="buttonlogin" type="submit"><strong>Sign Up</strong></button>
+            </form>
+
+        </div>
     </body>
 </div>
 {% endblock %}

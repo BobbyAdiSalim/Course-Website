@@ -84,6 +84,8 @@ def isStudent(identity):
 
 @app.route("/")
 def home():
+    if not isStudent(session) and not isInstructor(session):
+        return redirect ('/login')
     return render_template("index.html", home = True)
 
 @app.route("/labs")
@@ -243,36 +245,82 @@ def login():
 
     pass
 
-@app.route('/register', methods = ["GET", "POST"])
+@app.route('/registerStudent', methods = ["POST"])
 def register():
     if isInstructor(session) or isStudent(session):
         return redirect('/')
-    
-    if request.method == "GET":
-        return render_template("register.html")
-    
+
     if request.method == "POST":
         lst_usernames = Student.query.with_entities(Student.username).all()
 
         input_username = request.form["username"]
-        input_password = bcrypt.generate_password_hash(request.form["password"])
+        input_password = request.form["password"]
         input_name = request.form["name"]
-        if (input_username == "" or input_password == "" or input_name ==""):
-            flash("Invalid username and password!", "Invalid Input")
-            return redirect('/register')
+
+        if not input_username or not input_password or not input_name:
+            flash("Invalid username and password!", "Invalid input")
+
+        if input_username == "" or input_password == "" or input_name =="":
+            flash("Invalid username and password!", "Invalid input")
+            return redirect('/login')
         
-        if(input_username in lst_usernames):
+        if input_username in lst_usernames: 
             flash("Username already taken", "Invalid Input")
-            return redirect('/register')
+            return redirect('/login')
         
+        used_username = Student.query.filter(Student.username == input_username).all()
+        if used_username:
+            flash("Username already taken", "Invalid Input")
+            return redirect('/login')
+
+        bcrypt_password = bcrypt.generate_password_hash(request.form["password"])
         # Done check now create
-        new_student = Student(username = input_username, password = input_password, name = input_name)
+        new_student = Student(username = input_username, password = bcrypt_password, name = input_name)
+
         db.session.add(new_student)
         db.session.commit()
 
-        flash("Account created! Please login", "Register Success")
+        flash("Account created! Please login", "Success")
         return redirect('/login')
 
+@app.route('/registerInstructor', methods = ["POST"])
+def registerIns():
+    if isInstructor(session) or isStudent(session):
+        return redirect('/')
+
+    if request.method == "POST":
+        lst_usernames = Instructor.query.with_entities(Instructor.username).all()
+
+        input_username = request.form["username"]
+        input_password = request.form["password"]
+        input_name = request.form["name"]
+
+        if not input_username or not input_password or not input_name:
+            flash("Invalid username and password!", "Invalid input")
+
+        if input_username == "" or input_password == "" or input_name =="":
+            flash("Invalid username and password!", "Invalid input")
+            return redirect('/login')
+        
+        if input_username in lst_usernames: 
+            flash("Username already taken", "Invalid Input")
+            return redirect('/login')
+        
+        used_username = Instructor.query.filter(Instructor.username == input_username).all()
+        if used_username:
+            flash("Username already taken", "Invalid Input")
+            return redirect('/login')
+
+        bcrypt_password = bcrypt.generate_password_hash(request.form["password"])
+        # Done check now create
+        new_Instructor = Instructor(username = input_username, password = bcrypt_password, name = input_name)
+
+        db.session.add(new_Instructor)
+        db.session.commit()
+
+        flash("Account created! Please login", "Success")
+        return redirect('/login')
+    
 @app.route('/logout')
 def logout():
     if "auth" in session:
