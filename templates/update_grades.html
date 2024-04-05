@@ -2,6 +2,7 @@
 
 {% block extra_css %}
 <link href="{{ url_for('static', filename='css/update_grades.css') }}" rel="stylesheet" type="text/css">
+<script src="{{ url_for('static', filename='js/update_grades.js')}}"></script>
 {% endblock %}
 
 
@@ -44,7 +45,7 @@
                     <span class="student-id">{{ student.id }}</span>
 
                     <span class="student-grade">
-                        <input type="number" value="{{ grade }}" name="student{{ student.id }}_grade">
+                        <input class="grade-input" type="number" value="{{ grade }}" name="student{{ student.id }}_grade">
                     </span>
                 </div>
                 {% endfor %}
