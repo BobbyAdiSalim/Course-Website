@@ -6,4 +6,9 @@ $(document).ready(function() {
             e.preventDefault();
         }
     });
+    $('.grade-input').last().keypress(function (e) {
+        if (e.keyCode === 13) {
+            $('.add-button').click();
+        }
+    });
   });
