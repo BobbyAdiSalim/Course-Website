@@ -16,6 +16,7 @@ from flask_bcrypt import Bcrypt
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///assignment3.db'
 app.config["SECRET_KEY"] = "HJSCYIGA1982UYCH2C78E2BCGWGVXFTGbYDXGUBAJGDWUYGVDXGvjgsjVGGHJDWI"
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes = 10)
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
@@ -229,6 +230,7 @@ def login():
                         session["auth"] = "Student"
                         session["name"] = student.name
                         session["student_id"] = student.id
+                        session.permanent = True
                         return redirect("/")
             else:
                 instructor = Instructor.query.filter_by(username = input_username).first()
@@ -238,6 +240,7 @@ def login():
                         session["auth"] = "Instructor"
                         session["name"] = instructor.name
                         session["instructor_id"] = instructor.id
+                        session.permanent = True
                         return redirect("/")
             
             flash("Login failed! Invalid credentials", "Failed")
