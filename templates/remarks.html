@@ -9,28 +9,28 @@
 {% block content %}
 <main class="labs">
   <div class="table-container">
-      <div class="row">
+      <div class="row table-header">
           
-          <div class="column-5"><b>Student ID</b></div>
-          <div class="column"><b>Name</b></div>
-          <div class="column"><b>Type</b></div>
-          <div class="column-desc"><b>Remark Description</b> </div>
-          <div class="column"><b>Action</b></div>
+          <div class="column column-1"><strong>Student ID</strong></div>
+          <div class="column column-2"><strong>Name</strong></div>
+          <div class="column column-3"><strong>Type</strong></div>
+          <div class="column column-4"><strong>Remark Description</strong> </div>
+          <div class="column column-5"><strong>Action</strong></div>
         
-        </div>
+      </div>
       
-        {% for remark in lst_remarks %}
-        <div class="row">
-            <div class="column-5">{{ remark.grade.student.id }}</div>
-            <div class="column">{{ remark.grade.student.name }}</div>
-            <div class="column">{{ remark.grade.test.name }}</div>
-            <div class="column-desc">{{ remark.desc }}</div>
-            <div class="column">
-                <div><a href="/grades/remarks/{{ remark.id }}/resolve">Mark as Resolved</a></div>
-                <div><a href="/grades/{{ remark.grade.test.id }}?id={{ remark.grade.id }}">Change Grade</a></div>
-            </div>
-        </div>
-        {% endfor %}
+      {% for remark in lst_remarks %}
+      <div class="row table-content">
+          <div class="column column-1">{{ remark.grade.student.id }}</div>
+          <div class="column column-2">{{ remark.grade.student.name }}</div>
+          <div class="column column-3">{{ remark.grade.test.name }}</div>
+          <div class="column column-4">{{ remark.desc }}</div>
+          <div class="column column-5">
+              <div class="resolve"><a href="/grades/remarks/{{ remark.id }}/resolve">Mark as Resolved</a></div>
+              <div class="change"><a href="/grades/{{ remark.grade.test.id }}?id={{ remark.grade.id }}">Change Grade</a></div>
+          </div>
+      </div>
+      {% endfor %}
       
       
   </div>

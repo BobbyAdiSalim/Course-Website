@@ -1,3 +1,12 @@
+@media (max-width: 1000px){
+    .column-1 {
+        display: none;
+    }
+    .column-3 {
+        display: none;
+    }
+}
+
 .labs .table-container {
     display: flex;
     flex-direction: column;
@@ -11,26 +20,44 @@
 
 .labs .row {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid #ccc; /* Optional: Add a border between rows */
 }
 
-.labs .column-5{
-    flex: 0.5;
-    padding: 0 10px;
-}
 .labs .column {
-    flex: 1;
-    padding-left: 10px;
+    padding: 0 15px;
 }
 
-.labs .column-desc {
-    flex:3;
-    padding-left: 10px;
+.labs .column-1 {
+    flex: 2;
 }
 
-.labs .table-head {
+.labs .column-2 {
+    flex: 3;
+}
+.labs .column-3 {
+    flex: 4
+}
+
+.labs .column-4 {
+    flex: 6;
+}
+
+.labs .column-5 {
+    flex: 3;
+}
+
+.table-content .column-5 { 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-self: stretch;
+}
+
+.labs .table-header {
     font-weight: bold;
     font-size: 1.1em;
     padding-top: 5px;
@@ -39,4 +66,13 @@
 .row:last-child {
     padding-bottom: 0px;
     border-bottom-style: none;
+}
+
+.row a {
+    color: rgb(37, 53, 90);
+    text-decoration: none;
+}
+
+.row a:hover {
+    text-decoration: underline;
 }
