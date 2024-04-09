@@ -5,16 +5,22 @@
 {% endblock %}
 
 {% block content %}
-<main class="assignments">
-  <hr class="line-break">
-  <div class="assignment1">
-      <a href="mock.pdf"><h2>Midterm 1 (15 <sup>th</sup> March 2024 )</h2></a>
-      <hr>
-      <div class="subsect first"><b>Topic: </b>Relational Algebra and SQLite</div>
-      <div class="subsect"><b>Weight: </b>10%</div>
-      <div class="subsect"><b>Location:</b></div>
-          <img src="{{ url_for('static', filename ='images/midterm.png' ) }}" alt="location_of_midterm">
-      <hr class="line-break">
-    </div>
-</main>  
+    <main class="assignments">
+    {%for test in lst_tests%}
+        <hr class="line-break">
+        <div class="assignment1">
+            <a href="/static/pdf/mock.pdf"><h2>{{test.name}}</h2></a>
+            <hr>
+            <div class="subsect first"><b>Test date: </b>{{test.due_date}}</div>
+            <div class="subsect"><b>Weight: </b>{{test.weight}}%</div>
+            <div class="subsect"><strong>Brief description: </strong>
+                <p>
+                    {{ test.desc }}
+                </p>
+            </div>
+            <div class="subsect"><b>Location:</b></div>
+            <img src="{{ url_for('static', filename ='images/midterm.png' ) }}" alt="location_of_midterm">
+        </div>
+    {%endfor%}
+    </main>  
 {% endblock %}

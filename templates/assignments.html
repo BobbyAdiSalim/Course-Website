@@ -5,56 +5,21 @@
 {% endblock %}
 
 {% block content %}
-<main class="assignments">
-  <hr class="line-break">
-  <div class="assignment1">
-      <a href="mock.pdf"><h2>Assignment 1</h2></a>
-      <hr>
-      <div class="subsect first"><b>Topic: </b>Relational Algebra and SQLite</div>
-      <div class="subsect"><b>Weight: </b>8%</div>
-      <div class="subsect"><b>Due date: </b>February 14<sup>th</sup> 2024</div>
-      <div class="subsect"><b>Brief description: </b>
-      <p>In this assignment, you are a SQL Developer Intern on the University of Toruneto Health and Safety Team. 
-          Your team is working on projects related to Uni 2.0, a hybrid online and in person method of education 
-          during the pandemic. The senior database developer has written out some relationship schemas and would 
-          like you to write out RA and/or SQL queries for the following.</p>
-      </div>
-      <hr class="line-break">
-  </div>
-  <div class="assignment2">
-      <a href="mock.pdf"><h2>Assignment 2</h2></a>
-      <hr>
-      <div class="subsect first"><b>Topic: </b>HTML, CSS, and Flask</div>
-      <div class="subsect"><b>Weight: </b>10%</div>
-      <div class="subsect"><b>Due date: </b>March 15<sup>th</sup> 2024</div>
-      <div class="subsect"><b>Brief description: </b>
-      <p>In this assignment, you will develop a new course website for the course CSC B20 using HTML and CSS. You 
-          are not allowed to use any web framework such as BootStrap and JQuery etc. You may work individually or 
-          in groups of two or three. The webpage must be usable, responsive, and visually appealing. Below is an 
-          example course page, however it is up to you to create a design following the mandates listed in this 
-          assignment. I want you to have some fun with this assignment. There are some minimum requirements, but 
-          for the most part, there is a lot of creativity!</p>
-      </div>
-      <hr class="line-break">
-  </div>
-  <div class="assignment3">
-      <a href="mock.pdf"><h2>Assignment 3</h2></a>
-      <hr>
-      <div class="subsect first"><b>Topic: </b>Web Application and Database</div>
-      <div class="subsect"><b>Weight: </b>15%</div>
-      <div class="subsect"><b>Due date: </b>April 15<sup>th</sup> 2024</div>
-      <div class="subsect"><b>Brief description: </b>
-      <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris augue ipsum, rutrum vitae tincidunt 
-          cursus, gravida vel mauris. Duis posuere erat sed nulla molestie, nec pulvinar augue molestie. Mauris at 
-          mattis lacus. Nullam diam lectus, luctus a neque non, hendrerit placerat ligula. In ligula justo, aliquam et 
-          felis a, varius molestie mi. Nulla fringilla, ante quis sollicitudin facilisis, felis diam elementum nisi, 
-          nec volutpat neque lacus vel purus. Pellentesque habitant morbi tristique senectus et netus et malesuada 
-          fames ac turpis egestas. Etiam ac dapibus erat. Integer in tempus elit, in egestas dui. Vestibulum velit leo, 
-          pretium et lectus ac, molestie.</p>
-      </div>
-      <hr class="line-break">
-  </div>
-</main>
+    <main class="assignments">
+    {% for test in lst_assignments %}
+        <hr class="line-break">
+        <div class="assignment1">
+            <a href="/static/pdf/mock.pdf"><h2>{{test.name}}</h2></a>
+            <hr>
+            <div class="subsect first"><strong>Weight: </strong>{{test.weight}}%</div>
+            <div class="subsect"><strong>Due date: </strong>{{ test.due_date }}</div>
+            <div class="subsect"><strong>Brief description: </strong>
+                <p>
+                    {{ test.desc }}
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+    </main>
 {% endblock %}
 

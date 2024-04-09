@@ -94,19 +94,19 @@
 
             {% if "auth" in session and session["auth"] != "Instructor" %}
             <li> <a href="/grades" {% if grades %}
-                style = "font-weight: bold;"
-              {% endif %}>Grades </a></li>
-              {% endif %}
+              style = "font-weight: bold;"
+            {% endif %}>Grades </a></li>
+            {% endif %}
 
-              {% if "auth" in session and session["auth"] == 'Instructor' %}
-              <li> <a href="/grades" {% if grades %}
-                style = "font-weight: bold;"
-              {% endif %}>Grades and Assignment/Test</a></li>
-              {% endif %}
-              
-              <li> <a href="/grades/remarks" {% if remarks %}
-                style = "font-weight: bold;"
-              {% endif %}>Remark Request </a></li>
+            {% if "auth" in session and session["auth"] == 'Instructor' %}
+            <li> <a href="/grades" {% if grades %}
+              style = "font-weight: bold;"
+            {% endif %}>Manage Grades and Assignment/Test</a></li>
+            {% endif %}
+            
+            <li> <a href="/grades/remarks" {% if remarks %}
+              style = "font-weight: bold;"
+            {% endif %}>Remark Request </a></li>
               
               
               
@@ -173,7 +173,12 @@
       </div>
       <div class="footer-3 links">
         <div class="navigation">
-          <div><a href="/grades">Grades</a></div>
+          {% if "auth" in session and session["auth"] != "Instructor" %}
+            <div><a href="/grades">Grades</a></div>
+          {% endif %}
+          {% if "auth" in session and session["auth"] == "Instructor" %}
+            <div><a href="/grades">Manage Grades</a></div>
+          {% endif %}
           <div><a href="{{ url_for('static', filename = 'pdf/mock.pdf' ) }}">Syllabus</a></div>
           <div><a href="https://piazza.com/class/lqy466htv8g5xb" target="_blank">Discussion Board</a></div>
           <div><a href="https://markus2.utsc.utoronto.ca/courses/20/assignments" target="_blank">MarkUs</a></div>
