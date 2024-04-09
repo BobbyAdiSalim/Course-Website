@@ -1,3 +1,0 @@
-As a user, the webpage should be accessible and viewable from different screen sizes.
-
-This website allows the user to do that as the page will automatically adjusts to the user's screen size and the content will still be readable for the user.

@@ -1,2 +1,0 @@
-As a user, the student must be able to see their upcoming tests.
-When the user clicks on the "Tests" navigation button, the user can see their upcoming midterm date, topic, weight, and location of the midterm.

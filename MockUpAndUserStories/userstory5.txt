@@ -1,2 +1,0 @@
-As a user, the student must be able to see the description of the assignments relating to the course. 
-When the student clicks on the "Assignments" navigation button, the student will be able to see the topic, weight, due date, and brief description of each assignment that they are assigned to.

@@ -1,3 +1,0 @@
-As a user, the student must be able to get directed to the Discussion Board page (i.e. Piazza).
-
-When the student clicks on the "Discussion Board" navigation button, the student should immediately get directed to the Piazza website as the website will automatically pop up.
