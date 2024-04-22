@@ -25,7 +25,7 @@ class Student(db.Model):
     username = db.Column(db.String(50), unique = True, nullable = False)
     password = db.Column(db.Text, nullable = False)
     name = db.Column(db.String(250), nullable = False)
-    date_created = db.Column(db.Date, default = datetime.utcnow)
+    date_created = db.Column(db.Date, default = datetime.now)
     grades = db.relationship("Grades", backref = 'student', lazy = True)
 
 class Test(db.Model):
@@ -55,7 +55,7 @@ class Announcement(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(250), nullable = False)
     text = db.Column(db.Text)
-    date_created = db.Column(db.Date, default = datetime.utcnow)
+    date_created = db.Column(db.Date, default = datetime.now)
 
 class Feedback(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -64,7 +64,7 @@ class Feedback(db.Model):
     feedback3 = db.Column(db.Text)
     feedback4 = db.Column(db.Text)
     instructor_id = db.Column(db.Integer, db.ForeignKey('instructor.id'), nullable = False)
-    date_created = db.Column(db.Date, default = datetime.utcnow)
+    date_created = db.Column(db.Date, default = datetime.now)
 
 class RemarkRequest(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -253,76 +253,62 @@ def register():
     if isInstructor(session) or isStudent(session):
         return redirect('/')
 
-    if request.method == "POST":
-        lst_usernames = Student.query.with_entities(Student.username).all()
-
-        input_username = request.form["username"].lower()
-        input_password = request.form["password"]
-        input_name = request.form["name"]
-
-        if not input_username or not input_password or not input_name:
-            flash("Invalid username and password!", "Invalid input")
-
-        if input_username == "" or input_password == "" or input_name =="":
-            flash("Invalid username and password!", "Invalid input")
-            return redirect('/login')
-        
-        if input_username in lst_usernames: 
-            flash("Username already taken", "Invalid Input")
-            return redirect('/login')
-        
-        used_username = Student.query.filter(Student.username == input_username).all()
-        if used_username:
-            flash("Username already taken", "Invalid Input")
-            return redirect('/login')
-
-        bcrypt_password = bcrypt.generate_password_hash(request.form["password"])
-        # Done check now create
-        new_student = Student(username = input_username, password = bcrypt_password, name = input_name)
-
-        db.session.add(new_student)
-        db.session.commit()
-
-        flash("Account created! Please login", "Success")
+    lst_usernames = Student.query.with_entities(Student.username).all()
+    input_username = request.form["username"].lower()
+    input_password = request.form["password"]
+    input_name = request.form["name"]
+    if not input_username or not input_password or not input_name:
+        flash("Invalid username and password!", "Invalid input")
+    if input_username == "" or input_password == "" or input_name =="":
+        flash("Invalid username and password!", "Invalid input")
         return redirect('/login')
+    
+    if input_username in lst_usernames: 
+        flash("Username already taken", "Invalid Input")
+        return redirect('/login')
+    
+    used_username = Student.query.filter(Student.username == input_username).all()
+    if used_username:
+        flash("Username already taken", "Invalid Input")
+        return redirect('/login')
+    bcrypt_password = bcrypt.generate_password_hash(request.form["password"])
+    # Done check now create
+    new_student = Student(username = input_username, password = bcrypt_password, name = input_name)
+    db.session.add(new_student)
+    db.session.commit()
+    flash("Account created! Please login", "Success")
+    return redirect('/login')
 
 @app.route('/registerInstructor', methods = ["POST"])
 def registerIns():
     if isInstructor(session) or isStudent(session):
         return redirect('/')
-
-    if request.method == "POST":
-        lst_usernames = Instructor.query.with_entities(Instructor.username).all()
-
-        input_username = request.form["username"].lower()
-        input_password = request.form["password"]
-        input_name = request.form["name"]
-
-        if not input_username or not input_password or not input_name:
-            flash("Invalid username and password!", "Invalid input")
-
-        if input_username == "" or input_password == "" or input_name =="":
-            flash("Invalid username and password!", "Invalid input")
-            return redirect('/login')
-        
-        if input_username in lst_usernames: 
-            flash("Username already taken", "Invalid Input")
-            return redirect('/login')
-        
-        used_username = Instructor.query.filter(Instructor.username == input_username).all()
-        if used_username:
-            flash("Username already taken", "Invalid Input")
-            return redirect('/login')
-
-        bcrypt_password = bcrypt.generate_password_hash(request.form["password"])
-        # Done check now create
-        new_Instructor = Instructor(username = input_username, password = bcrypt_password, name = input_name)
-
-        db.session.add(new_Instructor)
-        db.session.commit()
-
-        flash("Account created! Please login", "Success")
+    
+    lst_usernames = Instructor.query.with_entities(Instructor.username).all()
+    input_username = request.form["username"].lower()
+    input_password = request.form["password"]
+    input_name = request.form["name"]
+    if not input_username or not input_password or not input_name:
+        flash("Invalid username and password!", "Invalid input")
+    if input_username == "" or input_password == "" or input_name =="":
+        flash("Invalid username and password!", "Invalid input")
         return redirect('/login')
+    
+    if input_username in lst_usernames: 
+        flash("Username already taken", "Invalid Input")
+        return redirect('/login')
+    
+    used_username = Instructor.query.filter(Instructor.username == input_username).all()
+    if used_username:
+        flash("Username already taken", "Invalid Input")
+        return redirect('/login')
+    bcrypt_password = bcrypt.generate_password_hash(request.form["password"])
+    # Done check now create
+    new_Instructor = Instructor(username = input_username, password = bcrypt_password, name = input_name)
+    db.session.add(new_Instructor)
+    db.session.commit()
+    flash("Account created! Please login", "Success")
+    return redirect('/login')
     
 @app.route('/logout')
 def logout():
@@ -366,19 +352,14 @@ def edit_grades(test_id):
         return redirect('/')
     
     if(request.method == "GET"):
-        grade_id = request.args.get("id")
         search = request.args.get('search')
-        if(grade_id):
-            lst_student_grades = [Grades.query.filter_by(id = grade_id).first()]
-            lst_student = [lst_student_grades[0].student]
-        else:
-            lst_student_grades = Grades.query.filter_by(test_id = test_id).all()
-            lst_student = Student.query.order_by(Student.name.asc()).all()
+        lst_student_grades = Grades.query.filter_by(test_id = test_id).all()
+        lst_student = Student.query.order_by(Student.name.asc()).all()
 
-            if search:
-                lst_student = Student.query.order_by(Student.name.asc()).filter(Student.name.like(f"%{search}%")).all()
-                lst_student.extend(Student.query.order_by(Student.name.asc()).filter(Student.id.like(f"%{search}%")).all())
-            
+        if search:
+            lst_student = Student.query.order_by(Student.name.asc()).filter(Student.name.like(f"%{search}%")).all()
+            lst_student.extend(Student.query.order_by(Student.name.asc()).filter(Student.id.like(f"%{search}%")).all())
+        
         if not search:
             search = ''
 
